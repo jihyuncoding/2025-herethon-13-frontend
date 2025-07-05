@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>signUp</title>
+    <link rel="stylesheet" href="signup.css" />
+</head>
+
+<body>
+    <div class="container">
+        <div class="mainBox">
+            <div class="mainTxt">이메일 주소</div>
+            <div class="subBox">
+                <input id="mail" class="mainInput" placeholder="이메일을 입력하세요." />
+                <button class="duBtn"> 중복 확인</button>
+            </div>
+            <div class="mainTxt">닉네임</div>
+            <div class="subBox">
+                <input id="name" class="mainInput" placeholder="닉네임을 입력하세요." />
+                <button class="duBtn"> 중복 확인</button>
+            </div>
+            <div class="mainTxt">비밀번호</div>
+            <div class="subBox">
+                <input id="pw" class="mainInput" placeholder="비밀번호를 입력하세요." />
+            </div>
+            <div class="mainTxt">비밀번호 확인</div>
+            <div class="subBox">
+                <input id="conPw" class="mainInput" placeholder="비밀번호를 입력하세요." />
+            </div>
+            <div id="confirm"></div>
+
+            <div class="mainTxt">관심 있는 카테고리</div>
+            <div class="caBox">
+                <button class="caBtn" id="study">학습 / 공부</button>
+                <button class="caBtn" id="career">커리어 / 직무</button>
+                <button class="caBtn" id="exercise">운동 / 건강</button>
+                <button class="caBtn" id="mind">마음 / 루틴</button>
+                <button class="caBtn" id="organize">정리 / 관리</button>
+                <button class="caBtn" id="hobby">취미</button>
+                <button class="caBtn" id="etc">기타</button>
+            </div>
+            <button id="joinBtn">회원가입</button>
+        </div>
+
+    </div>
+    <script src="signup.js"></script>
+
+</body>
+
+</html>
