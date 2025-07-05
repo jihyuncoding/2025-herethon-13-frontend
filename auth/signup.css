@@ -113,7 +113,7 @@ body {
 
 }
 
-.joinBtn {
+#joinBtn {
     display: flex;
     width: 240px;
     padding: 12px;
@@ -121,12 +121,43 @@ body {
     justify-content: center;
     align-items: center;
     border-radius: 8px;
-    background: #605BFF;
-    color: #FFF;
     font-family: Roboto;
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
     line-height: 24px;
+}
+
+#joinBtn.active {
+    background: #605BFF;
+    color: #FFF;
     border: none;
+
+}
+
+#joinBtn.false {
+    color: #000;
+    border: 1px solid #605BFF;
+}
+
+
+.error {
+    color: red;
+    font-family: Roboto;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    /* 142.857% */
+}
+
+
+.success {
+    color: green;
+    font-family: Roboto;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    /* 142.857% */
 }

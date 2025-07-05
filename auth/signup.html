@@ -13,22 +13,24 @@
         <div class="mainBox">
             <div class="mainTxt">이메일 주소</div>
             <div class="subBox">
-                <input class="mainInput" placeholder="이메일을 입력하세요." />
+                <input id="mail" class="mainInput" placeholder="이메일을 입력하세요." />
                 <button class="duBtn"> 중복 확인</button>
             </div>
             <div class="mainTxt">닉네임</div>
             <div class="subBox">
-                <input class="mainInput" placeholder="닉네임을 입력하세요." />
+                <input id="name" class="mainInput" placeholder="닉네임을 입력하세요." />
                 <button class="duBtn"> 중복 확인</button>
             </div>
             <div class="mainTxt">비밀번호</div>
             <div class="subBox">
-                <input class="mainInput" placeholder="비밀번호를 입력하세요." />
+                <input id="pw" class="mainInput" placeholder="비밀번호를 입력하세요." />
             </div>
             <div class="mainTxt">비밀번호 확인</div>
             <div class="subBox">
-                <input class="mainInput" placeholder="비밀번호를 입력하세요." />
+                <input id="conPw" class="mainInput" placeholder="비밀번호를 입력하세요." />
             </div>
+            <div id="confirm"></div>
+
             <div class="mainTxt">관심 있는 카테고리</div>
             <div class="caBox">
                 <button class="caBtn" id="study">학습 / 공부</button>
@@ -39,10 +41,12 @@
                 <button class="caBtn" id="hobby">취미</button>
                 <button class="caBtn" id="etc">기타</button>
             </div>
-            <button class="joinBtn">회원가입</button>
+            <button id="joinBtn">회원가입</button>
         </div>
 
     </div>
+    <script src="signup.js"></script>
+
 </body>
 
 </html>
