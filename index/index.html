@@ -1,89 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="index.css" />
-    <title>index</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1512, initial-scale=1.0" />
+  <title>도전</title>
+  <link rel="stylesheet" href="index.css" />
+  <link rel="stylesheet" href="my-challenge/myChallenge.css" />
+  <link rel="stylesheet" href="my-challenge/challengeAdd.css" />
 </head>
-
 <body>
-    <!-- ===========================
-     Sidebar 영역 시작
-     설명: 왼쪽 메뉴 + 프로필 박스
-    =========================== -->
-    <div class="sideBar">
-        <!--profileBox 시작-->
-        <div class="sideBar_profileBox">
+  <div class="spa-bg">
+    <div class="app-root">
+      <!-- 사이드바 -->
+      <div class="sideBar">
+        <!-- 상단: 프로필 + 메뉴 -->
+        <div class="sideBar_topSection">
+          <div class="sideBar_profileBox">
             <div class="sideBar_profileImg"></div>
             <div class="sideBar_profileName">김수정</div>
+          </div>
+
+          <div class="sideBar_menu">
+            <button class="sideBar_Box active" data-page="home">
+              <img src="../assets/Home.svg" class="sideBar_icon" />
+              <span class="sideBar_text">홈</span>
+            </button>
+            <button class="sideBar_Box" data-page="myChallenge">
+              <img src="../assets/Challenge.svg" class="sideBar_icon" />
+              <span class="sideBar_text">나의 도전</span>
+            </button>
+            <button class="sideBar_Box" data-page="community">
+              <img src="../assets/Community.svg" class="sideBar_icon" />
+              <span class="sideBar_text">커뮤니티</span>
+            </button>
+            <button class="sideBar_Box" data-page="badge">
+              <img src="../assets/Badge.svg" class="sideBar_icon" />
+              <span class="sideBar_text">뱃지</span>
+            </button>
+          </div>
         </div>
-        <!--profileBox 끝-->
 
-        <!--홈버튼 시작-->
-        <button id="home" class="sideBar_Box " onclick="goHome()">
-            <div class=" sideBar_Img">
-                <img src="./img/Home.svg" alt="홈">
-            </div>
-            <div class="sideBar_Txt">홈</div>
+        <!-- 하단: 로그아웃 버튼 -->
+        <button class="sideBar_logoutBox">
+          <img src="../assets/Logout.svg" class="sideBar_icon" />
+          <span class="sideBar_logoutText">Log out</span>
         </button>
-        <!--home버튼 끝-->
+      </div>
 
-        <!--나의 도전 버튼 시작-->
-        <button id="myChallenge" class="sideBar_Box" onclick="goChallenge()">
-            <div class="sideBar_Img">
-                <img src="./img/Challenge.svg" alt="나의 도전">
-            </div>
-            <div class="sideBar_Txt">나의 도전</div>
-        </button>
-        <!--나의 도전 버튼 끝-->
-
-        <!--커뮤니티 버튼 시작-->
-        <button id="community" class="sideBar_Box" onclick="goCommunity()">
-            <div class="sideBar_Img">
-                <img src="./img/Community.svg" alt="커뮤니티">
-            </div>
-            <div class="sideBar_Txt">커뮤니티</div>
-        </button>
-        <!--커뮤니티 버튼 끝-->
-
-        <!--뱃지 버튼 시작-->
-        <button id="badge" class="sideBar_Box" onclick="goBadge()">
-            <div class="sideBar_Img">
-                <img src="./img/Badge.svg" alt="뱃지">
-            </div>
-            <div class="sideBar_Txt">뱃지</div>
-        </button>
-        <!--뱃지 버튼 끝-->
-
-        <!--로그아웃 버튼 시작-->
-        <button id="logout" class="sideBar_logoutBox">
-            <div class="sideBar_Img">
-                <img src="./img/Logout.svg" alt="로그아웃">
-            </div>
-            <div class="sideBar_logoutTxt">Log out</div>
-        </button>
-        <!--로그아웃 버튼 끝-->
+      <!-- SPA 메인 영역 -->
+      <div id="mainArea" class="challenge-content-wrap">
+        <!-- 동적으로 콘텐츠 로딩 -->
+      </div>
     </div>
-    <!--SideBar 영역 끝-->
-
-    <!-- 로그아웃 모달 창 시작-->
-    <div id="modal" class="logout_modal">
-        <div class="logout_modalProfileBox">
-            <div class="logout_modalProfileImg"></div>
-            <div class="logout_modalProfileName">김수정</div>
-        </div>
-        <div class="logout_modalTxt">로그아웃 하시겠습니까?</div>
-        <div class="logout_modalBtnWrap">
-            <button class="logout_modalBtn" id="yes" onclick="goLogin()">예</button>
-            <button class="logout_modalBtn" id="no">아니오</button>
-        </div>
-    </div>
-    <!-- 로그아웃 모달 창 끝-->
-
-    <script src="index.js"></script>
-
+  </div>
+  <script src="index.js"></script>
 </body>
-
 </html>

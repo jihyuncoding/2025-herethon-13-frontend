@@ -1,260 +1,152 @@
-/*sideBar 스타일*/
-
 body {
+    margin: 0;
+    background: #F0F0F0;
+  }
+  
+  .spa-bg {
+    width: 100vw;
+    height: 982px;
+    background: #ffffff;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .app-root {
     width: 1512px;
     height: 982px;
+    min-width: 1512px;
     background: #F0F0F0;
-}
-
-/*sideBar 기본 상자*/
-.sideBar {
-    /* position: relative;
-    top: 32px;
-    left: 57px;*/
-    margin-top: 32px;
-    margin-left: 57px;
-    margin-right: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  
+  /* === Sidebar 전체 === */
+  .sideBar {
     width: 225px;
     height: 918px;
-    flex-shrink: 0;
-    border-radius: 10px;
+    margin: 32px 0 0 49px;
     background: #F7F7F7;
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
-}
-
-/*profile 상자*/
-.sideBar_profileBox {
-    margin-top: 42px;
-    margin-left: 20px;
-    margin-bottom: 27px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 42px 0 32px;
+    box-sizing: border-box;
+  }
+  
+  /* 상단 그룹: 프로필 + 메뉴 */
+  .sideBar_topSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  
+  /* 프로필 박스 */
+  .sideBar_profileBox {
     width: 185px;
     height: 51px;
-    flex-shrink: 0;
+    background: #fff;
     border-radius: 5px;
-    background: #FFF;
     display: flex;
     align-items: center;
-}
-
-/*프로필 이미지*/
-.sideBar_profileImg {
+    margin-bottom: 27px;
+  }
+  
+  .sideBar_profileImg {
     width: 37px;
     height: 37px;
-    flex-shrink: 0;
-    margin-left: 11px;
-    margin-right: 10px;
     background-color: #D9D9D9;
     border-radius: 50%;
-}
-
-/*프로필 닉네임*/
-.sideBar_profileName {
+    margin-left: 11px;
+    margin-right: 10px;
+  }
+  
+  .sideBar_profileName {
     color: #000;
     font-family: "Segoe UI";
     font-size: 13px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
-}
-
-/* 기본상태 side버튼 */
-.sideBar_Box {
+  }
+  
+  /* 메뉴 버튼 묶음 */
+  .sideBar_menu {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+  
+  /* 메뉴 버튼 */
+  .sideBar_Box {
     width: 185px;
     height: 38px;
-    flex-shrink: 0;
-    border-radius: 5px;
-    background: transparent;
     margin-left: 20px;
     margin-bottom: 13px;
     display: flex;
+    align-items: center;
     border: none;
-
-    &:hover {
-        opacity: 50%;
-    }
-}
-
-/*페이지 이동시 클래스 추가하면 백그라운드, 그림자 추가*/
-.sideBar_activeBox {
-    width: 185px;
-    height: 38px;
-    flex-shrink: 0;
+    background: transparent;
     border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .sideBar_Box.active {
     background: #605BFF;
-    box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.22);
-    color: #FFF;
-    font-family: Lato;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-    margin-left: 20px;
-    margin-bottom: 13px;
-    display: flex;
-    border: none;
-
-}
-
-/*기본 상태 버튼 안 이미지 공통*/
-.sideBar_Img {
+    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.22);
+  }
+  
+  
+  .sideBar_icon {
     width: 17px;
+    height: 17px;
     margin-left: 18px;
-    margin-top: 10px;
-    margin-right: 18px;
-}
+    margin-right: 20px;
+  }
 
-/*기본상태 버튼 안 텍스트*/
-.sideBar_Txt {
-    color: #474545;
+  .sideBar_Box.active .sideBar_icon {
+    filter: brightness(0) invert(1);
+  }
+  
+  .sideBar_text {
+    color: #000000;
     font-family: Lato;
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
-    margin-top: 11px;
-}
-
-/*클래스 추가하면 텍스트 하얀색*/
-.sideBar_activeTxt {
-    color: #FFF;
-    font-family: Lato;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-    margin-top: 11px;
-}
-
-/*로그아웃버튼*/
-.sideBar_logoutBox {
+  }
+  
+  .sideBar_Box.active .sideBar_text {
+    color: #fff;
+  }
+  
+  /* 로그아웃 버튼 */
+  .sideBar_logoutBox {
     width: 185px;
     height: 38px;
-    flex-shrink: 0;
-    border-radius: 5px;
-    background: transparent;
-    margin-left: 20px;
-    margin-top: 529px;
     display: flex;
     border: none;
-
-    &:hover {
-        opacity: 50%;
-    }
-}
-
-/*로그아웃 텍스트*/
-.sideBar_logoutTxt {
+    background: transparent;
+    cursor: pointer;
+  }
+  
+  .sideBar_logoutText {
     color: #E93C3C;
     font-family: Lato;
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
-    margin-top: 10px;
-
-}
-
-/*===============================
-    modal 스타일
-=================================*/
-
-/*로그아웃 모달 박스*/
-.logout_modal {
-    position: absolute;
-    top: 349px;
-    left: 508px;
-    width: 606px;
-    height: 380px;
-    flex-shrink: 0;
-    border-radius: 20px;
-    border: 4px solid #CECECE;
-    background: #FFF;
-    display: none;
-
-}
-
-/* 프로필 노란색 상자 */
-.logout_modalProfileBox {
-    width: 603px;
-    height: 63px;
-    flex-shrink: 0;
-    border-radius: 5px;
-    background: rgba(255, 222, 91, 0.18);
-    margin-top: 60px;
+  }
+  
+  .challenge-content-wrap {
     display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/*모달창 프로필사진*/
-.logout_modalProfileImg {
-    width: 37px;
-    height: 37px;
-    flex-shrink: 0;
-    background-color: #D9D9D9;
-    border-radius: 50%;
-    margin-right: 10px;
-}
-
-/*모달창 프로필 이름*/
-.logout_modalProfileName {
-    color: #000;
-    font-family: "Segoe UI";
-    font-size: 13px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-
-}
-
-/*모달창 로그인하시겠습니까? 텍스트*/
-.logout_modalTxt {
-    width: 268px;
-    color: #000;
-    text-align: center;
-    font-family: "Segoe UI";
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-    margin-top: 49px;
-    justify-content: center;
-    margin-left: 188px;
-    margin-bottom: 68px;
-}
-
-/*버튼 정렬을 위한 상자*/
-.logout_modalBtnWrap {
-    width: 603px;
-    height: 63px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/*모달창 예/아니오 버튼 스타일*/
-.logout_modalBtn {
-    width: 172.632px;
-    height: 58px;
-    flex-shrink: 0;
-    border-radius: 8px;
-    background: #605BFF;
-    color: #FFF;
-    font-family: "Segoe UI";
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 15px;
-    border: none;
-
-    &:hover {
-        opacity: 50%;
-    }
-}
-
-/*예 버튼 위치 조정*/
-#yes {
-    margin-left: 107px;
-    margin-right: 54px;
-}
+    flex: 1;
+    height: 918px;
+  }
+  
