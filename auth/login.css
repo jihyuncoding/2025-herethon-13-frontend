@@ -1,19 +1,37 @@
 body {
-    width: 1512px;
-    height: 982px;
+    margin: 0;
     background: #F0F0F0;
 }
 
 .container {
-    width: 1437px;
-    height: 918px;
-    position: relative;
-    top: 34px;
-    left: 39px;
-    bottom: 30px;
-    right: 36px;
+    width: 1237px;
+    height: 800px;
+    margin-top: 34px;
+    margin-bottom: 30px;
+    margin-left: 37px;
+    margin-right: 38px;
     border-radius: 10px;
     background: #F7F7F7;
+    padding: 60px 170px;
+
+}
+
+.spa-bg {
+    width: 100vw;
+    height: 982px;
+    background: #ffffff;
+    display: flex;
+    justify-content: center;
+}
+
+.app-root {
+    width: 1512px;
+    height: 982px;
+    min-width: 1512px;
+    background: #F0F0F0;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
 }
 
 .logo {
@@ -32,7 +50,8 @@ body {
 .mainBox {
     position: relative;
     top: 321px;
-    left: 747px;
+    left: 647px;
+
 }
 
 .subBox {

@@ -69,6 +69,14 @@ function readURL(input) {
         };
         reader.readAsDataURL(input.files[0]);
     } else {
-        document.getElementById('preview').src = "./img/previewImg.svg";
+        document.getElementById('preview').src = "../assets/previewImg.svg";
     }
 }
+
+// ------- 카테고리 선택 -------
+document.querySelectorAll('.category-btn').forEach(btn => {
+    btn.onclick = function () {
+        document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('selected'));
+        this.classList.add('selected');
+    }
+});
