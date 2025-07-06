@@ -10,21 +10,31 @@
 
 <body>
     <div class="container">
+
         <div class="mainBox">
+
             <div class="mainTxt">이메일 주소</div>
             <div class="subBox">
                 <input id="mail" class="mainInput" placeholder="이메일을 입력하세요." />
                 <button class="duBtn"> 중복 확인</button>
             </div>
+
             <div class="mainTxt">닉네임</div>
             <div class="subBox">
                 <input id="name" class="mainInput" placeholder="닉네임을 입력하세요." />
                 <button class="duBtn"> 중복 확인</button>
             </div>
+
+            <div class="mainTxt">프로필 사진</div>
+            <label class="uploadBtn" for="picBtn"> 사진 업로드 </label>
+            <input id="picBtn" type="file" onchange="readURL(this);">
+            <img id="preview" src="./img/previewImg.svg" alt="프로필 사진" />
+
             <div class="mainTxt">비밀번호</div>
             <div class="subBox">
-                <input id="pw" class="mainInput" placeholder="비밀번호를 입력하세요." />
+                <input type="password" id="pw" class="mainInput" placeholder="비밀번호를 입력하세요." />
             </div>
+
             <div class="mainTxt">비밀번호 확인</div>
             <div class="subBox">
                 <input id="conPw" class="mainInput" placeholder="비밀번호를 입력하세요." />
@@ -41,6 +51,7 @@
                 <button class="caBtn" id="hobby">취미</button>
                 <button class="caBtn" id="etc">기타</button>
             </div>
+
             <button id="joinBtn">회원가입</button>
         </div>
 

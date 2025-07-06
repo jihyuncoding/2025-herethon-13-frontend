@@ -17,16 +17,11 @@ body {
 }
 
 .mainBox {
-    position: relative;
-    top: 144px;
-    left: 3px;
     width: 1440px;
     padding: 60px 170px;
     justify-content: center;
     align-items: center;
-    gap: 60px;
     box-sizing: border-box;
-
 }
 
 .subBox {
@@ -80,6 +75,39 @@ body {
     border-radius: 8px;
     background: #605BFF;
     border: none;
+    color: #FFF;
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px;
+    /* 150% */
+}
+
+#preview {
+    display: flex;
+    box-sizing: border-box;
+    width: 210px;
+    height: 210px;
+    align-items: center;
+    gap: 8px;
+    border-radius: 5px;
+    margin-top: 21px;
+    background: var(--Gray-Color, #F0F0F0);
+}
+
+#picBtn {
+    display: none;
+}
+
+.uploadBtn {
+    display: flex;
+    width: 98px;
+    height: 36px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    background: #605BFF;
     color: #FFF;
     font-family: Roboto;
     font-size: 16px;

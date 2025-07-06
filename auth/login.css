@@ -16,7 +16,6 @@ body {
     background: #F7F7F7;
 }
 
-
 .logo {
     position: relative;
     top: 421px;
@@ -83,6 +82,7 @@ body {
     justify-content: center;
     align-items: center;
     border-radius: 8px;
+    background: #F7F7F7;
     border: 1px solid #605BFF;
     color: #000;
     font-family: Roboto;
@@ -93,7 +93,7 @@ body {
     margin-right: 12px;
 
     &:hover {
-        opacity: 80%;
+        opacity: 70%;
     }
 
 }
@@ -117,7 +117,7 @@ body {
     line-height: 24px;
 
     &:hover {
-        opacity: 80%;
+        opacity: 70%;
     }
 
 }
