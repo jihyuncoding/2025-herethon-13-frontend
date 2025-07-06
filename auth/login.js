@@ -3,7 +3,7 @@ function goSignUp() {
     location.href = "signup.html";
 }
 
-//홈으로 이동 (로그인시시)
+//홈으로 이동 (로그인시)
 function goHome() {
     location.href = "../index/index.html";
 }

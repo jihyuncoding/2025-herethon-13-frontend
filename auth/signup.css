@@ -83,6 +83,7 @@ body {
     margin-right: 4px;
 }
 
+/*중복확인 버튼*/
 .duBtn {
     display: flex;
     width: 98px;
@@ -102,6 +103,7 @@ body {
     /* 150% */
 }
 
+/*프로필 사진 프리뷰 */
 #preview {
     display: flex;
     box-sizing: border-box;
@@ -114,10 +116,12 @@ body {
     background: var(--Gray-Color, #F0F0F0);
 }
 
+/*파일 업로드 버튼*/
 #picBtn {
     display: none;
 }
 
+/*파일 업로드 버튼*/
 .uploadBtn {
     display: flex;
     width: 98px;
@@ -133,7 +137,6 @@ body {
     font-weight: 700;
     line-height: 24px;
     margin-top: 21px;
-    /* 150% */
 }
 
 
@@ -164,6 +167,7 @@ body {
     color: #fff;
 }
 
+/*회원가입 버튼*/
 #joinBtn {
     display: flex;
     width: 240px;
@@ -179,6 +183,7 @@ body {
     line-height: 24px;
 }
 
+/*회원가입 버튼(활성화시)*/
 #joinBtn.active {
     background: #605BFF;
     color: #FFF;
@@ -186,12 +191,13 @@ body {
 
 }
 
+/*회원가입 버튼(디폴트 스타일)*/
 #joinBtn.false {
     color: #000;
     border: 1px solid #605BFF;
 }
 
-
+/*중복확인 실패 메시지*/
 .error {
     color: red;
     font-family: Roboto;
@@ -202,7 +208,7 @@ body {
     /* 142.857% */
 }
 
-
+/*중복확인 성공 메시지*/
 .success {
     color: green;
     font-family: Roboto;
