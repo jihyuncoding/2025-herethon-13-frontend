@@ -1,6 +1,14 @@
 const checkedUrl = "../../assets/Checked Checkbox1.svg";
 const uncheckedUrl = "../../assets/Checked Checkbox.svg";
 
+// 공용 모달 열기/닫기 함수
+function openModal(modalId) {
+  document.getElementById(modalId).style.display = 'flex';
+}
+function closeModal(modalId) {
+  document.getElementById(modalId).style.display = 'none';
+}
+
 // 상세페이지 렌더 함수 (SPA: loadPage('challengeDetail', challengeId))
 window.renderChallengeDetail = function(challengeKey) {
   // ===== (1) 도전 데이터 로딩 및 찾기 =====
@@ -97,7 +105,7 @@ window.renderChallengeDetail = function(challengeKey) {
     }
   }
 
-  // ===== (5) 진행률 바 & 텍스트 =====
+  // ===== (5) 진행률 바 & 텍스트 (여기서 뱃지 모달 체크) =====
   function updateProgressUI() {
     const certRecords = JSON.parse(localStorage.getItem('certRecords') || '[]');
     const myCerts = certRecords.filter(r => String(r.challengeId) === String(challenge.id));
@@ -108,6 +116,18 @@ window.renderChallengeDetail = function(challengeKey) {
     const percent = total ? Math.round((done / total) * 100) : 0;
     document.querySelector('.challenge-detail-progress-label').textContent = `진행률 ${percent}% (${done}/${total})`;
     document.getElementById('progressBar').style.width = percent + "%";
+    
+    // 진행률 100%일 때 모달 표시 (최초 1회)
+    if (percent === 100 && !window._badgeModalShown) {
+      window._badgeModalShown = true;
+      // 모달 카테고리/타이틀도 현재 challenge로 동기화
+      document.getElementById('badgeModalCategory').textContent = challenge.category || "";
+      document.getElementById('badgeModalTitle').textContent = challenge.title || "";
+      openModal('badgeModal');
+    }
+    if (percent < 100) {
+      window._badgeModalShown = false; // 100% 아래로 내려가면 다시 체크 가능
+    }
   }
 
   // ===== (6) 인증기록 카드 렌더 및 카드 클릭 이동 =====
@@ -144,7 +164,7 @@ window.renderChallengeDetail = function(challengeKey) {
         </div>
       `;
     });
-    // --- 인증글 카드 클릭 → 인증 상세 페이지(SPA) 이동 ---
+    // 인증글 카드 클릭 → 인증 상세 페이지(SPA) 이동
     recordList.querySelectorAll('.challenge-record-card').forEach(card => {
       card.onclick = function() {
         const certId = this.getAttribute('data-cert-id');
@@ -153,6 +173,7 @@ window.renderChallengeDetail = function(challengeKey) {
     });
   }
 
+  // ===== (7) 달력 렌더 =====
   function renderCalendar(year, month, selectedDateStr) {
     const calendarContainer = document.querySelector('.calendar-grid');
     const calendarHeader = document.querySelector('.calendar-header span');
@@ -258,11 +279,11 @@ window.renderChallengeDetail = function(challengeKey) {
   document.getElementById('deleteBtn').onclick = function () {
     document.getElementById('modalCategory').textContent = challenge.category || "";
     document.getElementById('modalTitle').textContent = challenge.title || "";
-    document.getElementById('deleteModal').style.display = 'flex';
+    openModal('deleteModal');
   };
   // 삭제 모달 닫기(아니요)
   document.getElementById('modalDeleteNo').onclick = function () {
-    document.getElementById('deleteModal').style.display = 'none';
+    closeModal('deleteModal');
   };
   // 도전 삭제(예)
   document.getElementById('modalDeleteYes').onclick = function () {
@@ -273,7 +294,7 @@ window.renderChallengeDetail = function(challengeKey) {
     let certRecords = JSON.parse(localStorage.getItem('certRecords') || '[]');
     certRecords = certRecords.filter(r => String(r.challengeId) !== String(challenge.id));
     localStorage.setItem('certRecords', JSON.stringify(certRecords));
-    document.getElementById('deleteModal').style.display = 'none';
+    closeModal('deleteModal');
     alert('도전이 삭제되었습니다.');
     if (window.loadPage) window.loadPage('myChallenge');
   };
@@ -285,4 +306,14 @@ window.renderChallengeDetail = function(challengeKey) {
       if (window.loadPage) window.loadPage('myChallenge');
     }
   }
+
+  // === 도전 완료 뱃지 모달 버튼 ===
+  document.getElementById('badgeModalYes').onclick = function() {
+    closeModal('badgeModal');
+    alert('도전 완료 뱃지가 발급되었습니다!');
+    // 실제 뱃지 지급 로직 추가 예정
+  };
+  document.getElementById('badgeModalNo').onclick = function() {
+    closeModal('badgeModal');
+  };
 };
