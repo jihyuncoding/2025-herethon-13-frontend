@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  background: #F0F0F0;  
+  background: #F0F0F0;
   font-family: 'Noto Sans KR', sans-serif;
 }
 
@@ -56,7 +56,7 @@ body {
 }
 
 .tab {
-  background: rgba(0,0,0,0.05);
+  background: rgba(0, 0, 0, 0.05);
   border: none;
   border-radius: 6px;
   padding: 8px 12px;
@@ -85,7 +85,8 @@ body {
   margin: 22px 32px 20px 32px;
   align-items: center;
 }
-.challenge-list-header > div:first-child {
+
+.challenge-list-header>div:first-child {
   width: 210px;
   text-align: left;
   padding: 0;
@@ -94,16 +95,18 @@ body {
   font-family: "Segoe UI";
   font-weight: 600;
 }
-.challenge-list-header > div:nth-child(2) {
+
+.challenge-list-header>div:nth-child(2) {
   width: 128px;
   text-align: left;
   padding: 0;
-  margin-left: 30px; 
+  margin-left: 30px;
   font-size: 13px;
   font-family: "Segoe UI";
   font-weight: 600;
 }
-.challenge-list-header > div:last-child {
+
+.challenge-list-header>div:last-child {
   width: 290px;
   text-align: left;
   padding: 0;
@@ -115,8 +118,8 @@ body {
 
 .challenge-list {
   flex: 1;
-  min-height: 0;   
-  max-height: 650px;  
+  min-height: 0;
+  max-height: 650px;
   overflow-y: auto;
   overflow-x: hidden;
   display: flex;
@@ -130,6 +133,7 @@ body {
   border-radius: 6px;
   background: #f3f3f3;
 }
+
 .challenge-list::-webkit-scrollbar-thumb {
   background: #ccc;
   border-radius: 6px;
@@ -183,12 +187,13 @@ body {
   min-width: 128px;
   max-width: 128px;
   display: flex;
-  flex-direction: column;   
-  align-items: flex-start; 
+  flex-direction: column;
+  align-items: flex-start;
   gap: 6px;
   padding: 0;
-  margin-left: 30px; 
+  margin-left: 30px;
 }
+
 .progress-percent {
   font-family: "Segoe UI";
   font-size: 13px;
@@ -197,6 +202,7 @@ body {
   margin: 0;
   padding: 0;
 }
+
 .progress-bar-bg {
   width: 100%;
   min-width: 0;
@@ -206,6 +212,7 @@ body {
   overflow: hidden;
   margin: 0;
 }
+
 .progress-bar {
   height: 100%;
   background: #605BFF;
@@ -218,7 +225,7 @@ body {
   max-width: 290px;
   height: 30px;
   border-radius: 5px;
-  background: rgba(255,222,91,0.18);
+  background: rgba(255, 222, 91, 0.18);
   padding-left: 10px;
   color: #000;
   font-family: "Segoe UI";
@@ -263,8 +270,8 @@ body {
 
 .challenge-side-cards {
   width: 233px;
-  max-height: 820px;       
-  overflow-y: auto;        
+  max-height: 820px;
+  overflow-y: auto;
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
@@ -278,6 +285,7 @@ body {
   border-radius: 6px;
   background: #f3f3f3;
 }
+
 .challenge-side-cards::-webkit-scrollbar-thumb {
   background: #ccc;
   border-radius: 6px;
@@ -294,7 +302,7 @@ body {
   flex-direction: column;
   align-items: flex-start;
   box-sizing: border-box;
-  margin-bottom: 24px;  
+  margin-bottom: 24px;
   flex-shrink: 0;
 }
 

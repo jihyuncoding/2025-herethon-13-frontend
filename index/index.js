@@ -70,15 +70,14 @@ async function loadPage(pageName, detailKey) {
     script.onload = () => {
       // === 각 페이지별 렌더 함수 실행 ===
       if (window.renderLists) window.renderLists();
-
       if (window.renderChallengeAdd && pageName === "challengeAdd") {
-        window.renderChallengeAdd(currentChallengeAddId); // 도전 등록/수정
+        window.renderChallengeAdd(currentChallengeAddId);
       }
       if (window.renderChallengeDetail && pageName === "challengeDetail") {
         window.renderChallengeDetail(currentDetailTitle);
       }
       if (window.renderCertAdd && pageName === "certAdd") {
-        window.renderCertAdd(currentCertAddId);           // ★ 인증 등록/수정
+        window.renderCertAdd(currentCertAddId);
       }
       if (window.renderCertDetail && pageName === "certDetail") {
         window.renderCertDetail(currentCertId);

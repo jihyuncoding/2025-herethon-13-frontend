@@ -153,14 +153,14 @@ window.renderChallengeAdd = function(challengeId) {
     const selected = certDropdown.querySelector('.dropdown-selected');
     const options = certDropdown.querySelectorAll('.dropdown-list li');
     if (selected) {
-      selected.addEventListener('click', function(e) {
+      selected.addEventListener('click', function (e) {
         e.stopPropagation();
         certDropdown.classList.toggle('open');
         selected.classList.toggle('active');
       });
     }
     options.forEach(opt => {
-      opt.addEventListener('click', function(e) {
+      opt.addEventListener('click', function (e) {
         e.stopPropagation();
         options.forEach(o => o.classList.remove('selected'));
         opt.classList.add('selected');

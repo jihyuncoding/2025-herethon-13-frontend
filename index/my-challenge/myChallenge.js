@@ -23,8 +23,16 @@ window.renderLists = function() {
         }
     });
 
-    // --- 3. 도전 데이터 불러오기 ---
+    // --- 3. 도전 데이터 불러오기 + completedGoals 보정 ---
     const data = JSON.parse(localStorage.getItem('challenges') || '[]');
+    let changed = false;
+    data.forEach(ch => {
+        if (!('completedGoals' in ch)) {
+            ch.completedGoals = [];
+            changed = true;
+        }
+    });
+    if (changed) localStorage.setItem('challenges', JSON.stringify(data));
 
     // --- 4. 진행률 계산 (completedGoals/전체 goals) ---
     function calcProgress(ch) {
