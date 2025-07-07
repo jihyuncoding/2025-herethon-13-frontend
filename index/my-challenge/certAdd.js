@@ -1,5 +1,5 @@
 window.renderCertAdd = function(certIdOrChallengeId) {
-  // === 1. 인증글(수정)인지 신규등록(도전id)인지 구분 ===
+  // 1. 인증글(수정)인지 신규등록(도전id)인지 구분
   const certRecords = JSON.parse(localStorage.getItem('certRecords') || '[]');
   const editingCert = certRecords.find(r => String(r.id) === String(certIdOrChallengeId));
   let challenge = null;
@@ -7,20 +7,20 @@ window.renderCertAdd = function(certIdOrChallengeId) {
   let challengeId = null;
 
   if (editingCert) {
-    // --- 인증글 수정모드 ---
+    // 인증글 수정모드
     editMode = true;
     challengeId = editingCert.challengeId;
     const challenges = JSON.parse(localStorage.getItem('challenges') || '[]');
     challenge = challenges.find(ch => String(ch.id) === String(challengeId));
   } else {
-    // --- 신규등록 (도전id) ---
+    // 신규등록 (도전id)
     editMode = false;
     challengeId = certIdOrChallengeId;
     const challenges = JSON.parse(localStorage.getItem('challenges') || '[]');
     challenge = challenges.find(ch => String(ch.id) === String(challengeId));
   }
 
-  // === 2. DOM 요소 가져오기 ===
+  // 2. DOM 요소 가져오기 
   const imgInput   = document.getElementById('certAddImg');
   const imgLabel   = document.getElementById('certAddImgLabel');
   const imgPreview = document.getElementById('certAddImgPreviewArea');
@@ -36,7 +36,7 @@ window.renderCertAdd = function(certIdOrChallengeId) {
 
   let imgDataUrl = "";
 
-  // === 3. 카테고리, 타이틀 렌더링 ===
+  // 3. 카테고리, 타이틀 렌더링 
   if (challenge) {
     if (categorySpan)      categorySpan.textContent = challenge.category || '';
     if (challengeTitleSpan) challengeTitleSpan.textContent = challenge.title || '';
@@ -45,7 +45,7 @@ window.renderCertAdd = function(certIdOrChallengeId) {
     if (challengeTitleSpan) challengeTitleSpan.textContent = editingCert.challengeTitle || '';
   }
 
-  // === 4. 세부 목표 드롭다운 생성 ===
+  // 4. 세부 목표 드롭다운 생성 
   if (goalSelect) {
     goalSelect.innerHTML = "";
     const goals = challenge?.goals || [];
@@ -69,7 +69,7 @@ window.renderCertAdd = function(certIdOrChallengeId) {
     }
   }
 
-  // === 5. 날짜 입력 ===
+  // 5. 날짜 입력 
   if (dateInput) {
     if (editMode && editingCert && editingCert.date) {
       dateInput.value = editingCert.date;
@@ -78,7 +78,7 @@ window.renderCertAdd = function(certIdOrChallengeId) {
     }
   }
 
-  // === 6. 이미지 미리보기 처리 ===
+  // 6. 이미지 미리보기 처리
   if (editMode && editingCert && editingCert.imgDataUrl && imgLabel) {
     imgDataUrl = editingCert.imgDataUrl;
     imgLabel.style.backgroundImage = `url('${imgDataUrl}')`;
@@ -108,7 +108,7 @@ window.renderCertAdd = function(certIdOrChallengeId) {
     };
   }
 
-  // === 7. 제목, 내용, 메모 값 세팅 ===
+  // 7. 제목, 내용, 메모 값 세팅
   if (editMode && editingCert) {
     if (titleInput)   titleInput.value   = editingCert.title   || '';
     if (contentInput) contentInput.value = editingCert.content || '';
@@ -119,7 +119,7 @@ window.renderCertAdd = function(certIdOrChallengeId) {
     if (memoInput)    memoInput.value    = '';
   }
 
-  // === 8. 등록/수정 버튼 클릭 이벤트 ===
+  // 8. 등록/수정 버튼 클릭 이벤트
   if (registerBtn) {
     registerBtn.onclick = function (e) {
       e.preventDefault();
@@ -136,7 +136,7 @@ window.renderCertAdd = function(certIdOrChallengeId) {
 
       let certRecords = JSON.parse(localStorage.getItem('certRecords') || '[]');
 
-      // --- 유효성 검사 ---
+      //  유효성 검사 
       if (!title) {
         alert('인증 제목을 입력해주세요.');
         return;
@@ -147,7 +147,7 @@ window.renderCertAdd = function(certIdOrChallengeId) {
       }
 
       if (editMode && editingCert) {
-        // --- 인증글 수정 ---
+        // 인증글 수정 
         const idx = certRecords.findIndex(r => String(r.id) === String(certIdOrChallengeId));
         if (idx !== -1) {
           certRecords[idx] = {
@@ -165,7 +165,7 @@ window.renderCertAdd = function(certIdOrChallengeId) {
         }
         alert('인증글이 수정되었습니다!');
       } else {
-        // --- 인증글 신규 등록 ---
+        // 인증글 신규 등록 
         let newCert = {
           id: Date.now(),
           challengeId,
@@ -195,7 +195,7 @@ window.renderCertAdd = function(certIdOrChallengeId) {
     };
   }
 
-  // === 9. 닫기 버튼 이벤트 ===
+  // 9. 닫기 버튼 이벤트
   if (closeBtn) {
     closeBtn.onclick = function () {
       const challengeId = challenge?.id || editingCert?.challengeId;

@@ -130,7 +130,7 @@ window.renderChallengeAdd = function(challengeId) {
         const rm = document.createElement('span');
         rm.className = 'remove-goal';
         const rmImg = document.createElement('img');
-        rmImg.src = '../assets/close.svg';
+        rmImg.src = '../../assets/Cancel.svg';
         rmImg.alt = '삭제';
         rmImg.style.width = '18px';
         rmImg.style.height = '18px';
@@ -148,39 +148,7 @@ window.renderChallengeAdd = function(challengeId) {
     });
   }
 
-  // ===== (6) 인증주기 커스텀 드롭다운 동작 =====
-  if (certDropdown) {
-    const selected = certDropdown.querySelector('.dropdown-selected');
-    const options = certDropdown.querySelectorAll('.dropdown-list li');
-    if (selected) {
-      selected.addEventListener('click', function (e) {
-        e.stopPropagation();
-        certDropdown.classList.toggle('open');
-        selected.classList.toggle('active');
-      });
-    }
-    options.forEach(opt => {
-      opt.addEventListener('click', function (e) {
-        e.stopPropagation();
-        options.forEach(o => o.classList.remove('selected'));
-        opt.classList.add('selected');
-        if (selected) {
-          selected.querySelector('.dropdown-selected-text').textContent = opt.textContent;
-        }
-        certDropdown.classList.remove('open');
-        if (selected) selected.classList.remove('active');
-      });
-    });
-    // 바깥 클릭시 드롭다운 닫힘
-    document.addEventListener('click', (e) => {
-      if (!certDropdown.contains(e.target)) {
-        certDropdown.classList.remove('open');
-        if (selected) selected.classList.remove('active');
-      }
-    });
-  }
-
-  // ===== (7) 등록/수정 버튼: 도전 저장 =====
+  // ===== (6) 등록/수정 버튼: 도전 저장 =====
   if (registerBtn) {
     registerBtn.onclick = function () {
       // 입력값 수집
