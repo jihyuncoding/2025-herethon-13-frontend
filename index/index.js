@@ -1,4 +1,4 @@
-// SPA: 페이지 이름-경로 매핑
+// --- SPA: 페이지 이름-경로 매핑 ---
 const PAGE_CONFIG = {
   home:            { html: "home.html", js: "" },
   myChallenge:     { html: "my-challenge/myChallenge.html", js: "my-challenge/myChallenge.js" },
@@ -6,17 +6,17 @@ const PAGE_CONFIG = {
   challengeDetail: { html: "my-challenge/challengeDetail.html", js: "my-challenge/challengeDetail.js" },
   certAdd:         { html: "my-challenge/certAdd.html", js: "my-challenge/certAdd.js" },
   certDetail:      { html: "my-challenge/certDetail.html", js: "my-challenge/certDetail.js" },
-  community:       { html: "community.html", js: "" },
+  community:       { html: "community/community.html", js: "" }, // 경로 주의!
   badge:           { html: "badge.html", js: "" }
 };
 
-// --- 상세, 인증상세, 도전수정, 인증수정 전역 저장용 ---
+// --- 상세/수정/등록 전역 저장용 ---
 let currentDetailTitle = null;
 let currentCertId = null;
 let currentChallengeAddId = null;
-let currentCertAddId = null;    // ★ 인증글 등록/수정용 id
+let currentCertAddId = null;
 
-// SPA 메인 로더 함수
+// --- SPA 메인 로더 함수 ---
 async function loadPage(pageName, detailKey) {
   const { html: htmlPath, js: jsPath } = PAGE_CONFIG[pageName] || PAGE_CONFIG["home"];
   try {
@@ -29,7 +29,7 @@ async function loadPage(pageName, detailKey) {
     return;
   }
 
-  // --- 각 페이지별 detailKey 전역 저장 ---
+  // --- detailKey 등 상태 저장 ---
   if (pageName === "challengeDetail" && detailKey) {
     currentDetailTitle = detailKey;
     currentCertId = null;
@@ -51,24 +51,22 @@ async function loadPage(pageName, detailKey) {
     currentCertId = null;
     currentChallengeAddId = null;
   } else {
-    // 다른 페이지일 때 모두 초기화
     currentDetailTitle = null;
     currentCertId = null;
     currentChallengeAddId = null;
     currentCertAddId = null;
   }
 
-  // --- 기존 동적 JS 스크립트 제거 ---
+  // --- 이전 동적 JS 제거 ---
   const prev = document.getElementById("dynamic-page-script");
   if (prev) prev.remove();
 
-  // --- JS 동적 로드 및 콜백 ---
+  // --- JS 파일 동적 로드 & 콜백 ---
   if (jsPath) {
     const script = document.createElement("script");
     script.src = jsPath;
     script.id = "dynamic-page-script";
     script.onload = () => {
-      // === 각 페이지별 렌더 함수 실행 ===
       if (window.renderLists) window.renderLists();
       if (window.renderChallengeAdd && pageName === "challengeAdd") {
         window.renderChallengeAdd(currentChallengeAddId);
@@ -93,17 +91,20 @@ window.currentCertId = () => currentCertId;
 window.currentChallengeAddId = () => currentChallengeAddId;
 window.currentCertAddId = () => currentCertAddId;
 
-// --- 사이드바 버튼 이벤트 ---
-document.querySelectorAll(".sideBar_Box").forEach((btn) => {
+// --- 사이드바 버튼 이벤트 등록 ---
+document.querySelectorAll(".sideBar_Box").forEach(btn => {
   btn.addEventListener("click", function () {
-    document.querySelectorAll(".sideBar_Box").forEach((b) => b.classList.remove("active"));
+    document.querySelectorAll(".sideBar_Box").forEach(b => b.classList.remove("active"));
     this.classList.add("active");
+    // data-page 속성 기준으로 이동
     loadPage(this.dataset.page);
   });
 });
 
-// --- 전역 함수 등록 (SPA 페이지 이동에 사용) ---
+// --- SPA 페이지 이동 함수 전역 등록 ---
 window.loadPage = loadPage;
 
-// --- 초기 진입시 home 로드 ---
-loadPage("home");
+// --- 최초 진입시 home 페이지 로드 ---
+window.addEventListener("DOMContentLoaded", () => {
+  loadPage("home");
+});

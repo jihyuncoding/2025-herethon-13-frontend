@@ -52,89 +52,62 @@ window.renderChallengeDetail = function(challengeKey) {
   }
   document.querySelector('.challenge-detail-public').textContent = challenge.isPublic ? "공개" : "비공개";
 
-  // ===== (4) 진행률 바 & 텍스트 렌더 =====
-  function updateProgressUI() {
-    const total = (challenge.goals || []).length;
-    const done = (challenge.completedGoals || []).length || 0;
-    const percent = total ? Math.round((done / total) * 100) : 0;
-    document.querySelector('.challenge-detail-progress-label').textContent = `진행률 ${percent}% (${done}/${total})`;
-    document.getElementById('progressBar').style.width = percent + "%";
-  }
-
-  // ===== (5) 세부 목표(완료/진행중) 렌더링 및 체크/체크해제 동작 =====
+  // ===== (4) 세부목표(인증글로 자동 체크/미체크) =====
   function renderGoals() {
-    let completedGoals = challenge.completedGoals || [];
-    const completedList = document.getElementById('completedGoalList');
-    const inprogressList = document.getElementById('inprogressGoalList');
-    completedList.innerHTML = "";
-    inprogressList.innerHTML = "";
+    const certRecords = JSON.parse(localStorage.getItem('certRecords') || '[]');
+    const myCerts = certRecords.filter(r => String(r.challengeId) === String(challenge.id));
+    const completedGoals = (challenge.goals || []).filter(goal =>
+      myCerts.some(cert => cert.goal === goal)
+    );
+    const inprogressGoals = (challenge.goals || []).filter(goal =>
+      !completedGoals.includes(goal)
+    );
 
-    // --- 완료한 세부 목표 리스트 ---
+    // 완료 리스트
+    const completedList = document.getElementById('completedGoalList');
+    completedList.innerHTML = '';
     completedGoals.forEach(goal => {
       const li = document.createElement('li');
       li.innerHTML = `
-        <button class="goal-checkbox-btn" aria-label="체크 해제">
+        <span class="goal-checkbox-static">
           <img src="${checkedUrl}" alt="체크 아이콘" width="24" height="24" />
-        </button>
+        </span>
         <span class="goal-text-box">${goal}</span>
       `;
       completedList.appendChild(li);
     });
 
-    // --- 진행중(미완료) 세부 목표 리스트 ---
-    (challenge.goals || []).forEach(goal => {
-      if (!completedGoals.includes(goal)) {
-        const li = document.createElement('li');
-        li.innerHTML = `
-          <button class="goal-checkbox-btn" aria-label="목표 체크">
-            <img src="${uncheckedUrl}" alt="체크박스 해제" width="24" height="24" />
-          </button>
-          <span class="goal-text-box inprogress">${goal}</span>
-        `;
-        inprogressList.appendChild(li);
-      }
+    // 미완료 리스트
+    const inprogressList = document.getElementById('inprogressGoalList');
+    inprogressList.innerHTML = '';
+    inprogressGoals.forEach(goal => {
+      const li = document.createElement('li');
+      li.innerHTML = `
+        <span class="goal-checkbox-static">
+          <img src="${uncheckedUrl}" alt="체크박스 해제" width="24" height="24" />
+        </span>
+        <span class="goal-text-box inprogress">${goal}</span>
+      `;
+      inprogressList.appendChild(li);
     });
 
-    // --- 체크해서 완료 처리 ---
-    inprogressList.querySelectorAll('.goal-checkbox-btn').forEach(btn => {
-      btn.onclick = function () {
-        const li = this.closest('li');
-        const goalText = li.querySelector('.goal-text-box').textContent.trim();
-        if (!completedGoals.includes(goalText)) {
-          completedGoals.push(goalText);
-        }
-        challenge.completedGoals = completedGoals;
-        const idx = data.findIndex(ch => ch.id === challenge.id);
-        if (idx !== -1) {
-          data[idx] = challenge;
-          localStorage.setItem('challenges', JSON.stringify(data));
-        }
-        renderGoals();
-        updateProgressUI();
-      };
-    });
-
-    // --- 체크 해제해서 미완료로 복귀 ---
-    completedList.querySelectorAll('.goal-checkbox-btn').forEach(btn => {
-      btn.onclick = function () {
-        const li = this.closest('li');
-        const goalText = li.querySelector('.goal-text-box').textContent.trim();
-        completedGoals = completedGoals.filter(g => g !== goalText);
-        challenge.completedGoals = completedGoals;
-        const idx = data.findIndex(ch => ch.id === challenge.id);
-        if (idx !== -1) {
-          data[idx] = challenge;
-          localStorage.setItem('challenges', JSON.stringify(data));
-        }
-        renderGoals();
-        updateProgressUI();
-      };
-    });
-
-    // --- 목표 없을 때 안내문 ---
+    // 목표 없을 때
     if ((challenge.goals || []).length === 0) {
       inprogressList.innerHTML = '<li><span style="color:#aaa;">세부 목표가 없습니다.</span></li>';
     }
+  }
+
+  // ===== (5) 진행률 바 & 텍스트 =====
+  function updateProgressUI() {
+    const certRecords = JSON.parse(localStorage.getItem('certRecords') || '[]');
+    const myCerts = certRecords.filter(r => String(r.challengeId) === String(challenge.id));
+    const total = (challenge.goals || []).length;
+    const done = (challenge.goals || []).filter(goal =>
+      myCerts.some(cert => cert.goal === goal)
+    ).length;
+    const percent = total ? Math.round((done / total) * 100) : 0;
+    document.querySelector('.challenge-detail-progress-label').textContent = `진행률 ${percent}% (${done}/${total})`;
+    document.getElementById('progressBar').style.width = percent + "%";
   }
 
   // ===== (6) 인증기록 카드 렌더 및 카드 클릭 이동 =====
@@ -180,7 +153,6 @@ window.renderChallengeDetail = function(challengeKey) {
     });
   }
 
-  // ===== (7) 달력 렌더링 및 일자 클릭시 필터 =====
   function renderCalendar(year, month, selectedDateStr) {
     const calendarContainer = document.querySelector('.calendar-grid');
     const calendarHeader = document.querySelector('.calendar-header span');
@@ -233,7 +205,35 @@ window.renderChallengeDetail = function(challengeKey) {
         }
       }
     });
-  }
+  
+    // === 월 이동 버튼 동작 추가 ===
+    const prevBtn = document.querySelector('.calendar-prev-btn');
+    const nextBtn = document.querySelector('.calendar-next-btn');
+    if (prevBtn) {
+      prevBtn.onclick = function() {
+        let newYear = year;
+        let newMonth = month - 1;
+        if (newMonth < 1) {
+          newMonth = 12;
+          newYear -= 1;
+        }
+        renderCalendar(newYear, newMonth, null);
+        renderCertRecords(); // 월 이동 시 날짜 필터 해제
+      };
+    }
+    if (nextBtn) {
+      nextBtn.onclick = function() {
+        let newYear = year;
+        let newMonth = month + 1;
+        if (newMonth > 12) {
+          newMonth = 1;
+          newYear += 1;
+        }
+        renderCalendar(newYear, newMonth, null);
+        renderCertRecords(); // 월 이동 시 날짜 필터 해제
+      };
+    }
+  }  
 
   // ===== (8) 최초 렌더링 =====
   const now = new Date();

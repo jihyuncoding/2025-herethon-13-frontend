@@ -36,11 +36,16 @@ window.renderLists = function() {
 
     // --- 4. 진행률 계산 (completedGoals/전체 goals) ---
     function calcProgress(ch) {
+        const certRecords = JSON.parse(localStorage.getItem('certRecords') || '[]');
+        const myCerts = certRecords.filter(r => String(r.challengeId) === String(ch.id));
         const total = (ch.goals || []).length;
-        const done = (ch.completedGoals || []).length;
+        const done = (ch.goals || []).filter(goal =>
+            myCerts.some(cert => cert.goal === goal)
+        ).length;
         if (!total) return 0;
         return Math.round((done / total) * 100);
     }
+    
 
     // --- 5. 리스트/사이드카드 렌더 함수 ---
     function renderLists() {
@@ -60,6 +65,8 @@ window.renderLists = function() {
 
         // 리스트 각 행
         filtered.slice().reverse().forEach(ch => {
+
+            console.log('도전 타이틀:', ch.title);
             // D+N 계산
             let dDayText = '';
             if (ch.startDate) {
@@ -105,31 +112,27 @@ window.renderLists = function() {
 
         // --- 6. 사이드카드 인증(오늘 인증 대상) ---
         sideCards.innerHTML = '';
-        const today = new Date();
-        today.setHours(0,0,0,0);
 
-        const cards = filtered.filter(ch => {
-            if (!ch.startDate || !ch.endDate || !ch.certCycle) return false;
-            const start = new Date(ch.startDate);
-            const end = new Date(ch.endDate);
-            start.setHours(0,0,0,0);
-            end.setHours(0,0,0,0);
-            if (today < start || today > end) return false;
-            const diff = Math.floor((today - start) / (1000 * 60 * 60 * 24));
-            if (ch.certCycle === "매일") return true;
-            if (ch.certCycle === "주 3회") {
-                const dow = today.getDay();
-                return (dow === 1 || dow === 3 || dow === 5); // 월/수/금
-            }
-            if (ch.certCycle === "주 1회") return diff % 7 === 0;
-            return false;
-        });
+        const now = new Date();
+        now.setHours(0, 0, 0, 0);
 
-        if (cards.length === 0) {
-            sideCards.innerHTML = `<div style="padding:20px;color:#aaa;">오늘 인증할 도전이 없습니다.</div>`;
+        const soonToEnd = filtered
+            .filter(ch => ch.endDate) // 종료일 있는 도전만
+            .map(ch => {
+                const end = new Date(ch.endDate);
+                end.setHours(0,0,0,0);
+                const remain = Math.max(0, Math.floor((end - now) / (1000 * 60 * 60 * 24)));
+                return { ...ch, remain };
+            })
+            .sort((a, b) => a.remain - b.remain) // 남은 일수 오름차순
+            .slice(0, 3);
+
+        if (soonToEnd.length === 0) {
+            sideCards.innerHTML = `<div style="padding:20px;color:#aaa;">표시할 도전이 없습니다.</div>`;
             return;
         }
-        cards.forEach(ch => {
+
+        soonToEnd.forEach(ch => {
             const certImgStyle = makeCertImgStyle(ch.imgDataUrl);
             const div = document.createElement('div');
             div.className = 'cert-card';
@@ -141,13 +144,15 @@ window.renderLists = function() {
             `;
             sideCards.appendChild(div);
 
-            // 인증하러 가기 클릭 → 인증 작성 페이지 이동(SPA)
+            // "인증하러 가기" 클릭 시 certAdd 페이지로 이동
             const link = div.querySelector('.cert-link');
             link.onclick = function(e) {
                 e.preventDefault();
-                if (window.loadPage) window.loadPage("certAdd", ch.id);
+                if (window.loadPage) window.loadPage("certAdd", ch.id);  // certAdd로 이동!
             };
+
         });
+
     }
 
     // --- 7. 최초 렌더 ---
