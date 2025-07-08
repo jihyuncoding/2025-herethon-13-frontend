@@ -1,4 +1,5 @@
 <div class="main-content">
+  
   <div class="community-detail-content-layout">
     <!-- 왼쪽: 썸네일 + 글 정보 -->
     <div class="detail-main">
@@ -37,7 +38,11 @@
 
     <!-- 오른쪽: 댓글 -->
     <aside class="detail-comments">
-      <button class="detail-close-btn" aria-label="닫기">×</button>
+      <!-- 페이지 닫기 버튼 -->
+      <button class="detail-close-btn" id="communityDetailCloseBtn" aria-label="닫기">
+        <img src="../../assets/Cancel.svg" alt="닫기" />
+      </button>
+
       <div class="comment-list">
         <div class="comment-item">
           <div class="comment-profile"></div>

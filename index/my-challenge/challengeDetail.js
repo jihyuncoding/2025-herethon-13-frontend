@@ -236,10 +236,11 @@ window.renderChallengeDetail = function(challengeKey) {
   document.getElementById('editBtn').onclick = () => window.loadPage && window.loadPage('challengeAdd', challenge.id);
   document.getElementById('certBtn').onclick = () => window.loadPage && window.loadPage('certAdd', challenge.id);
   document.getElementById('globalCloseBtn').onclick = () => {
-    if (window.history.length > 1) {
-      window.history.back(); // 이전 페이지로
+    const { pageName, detailKey } = window.getPrevPage?.() || {};
+    if (pageName) {
+      window.loadPage(pageName, detailKey);
     } else {
-      window.loadPage && window.loadPage('myChallenge'); // 없으면 기본 페이지로
+      window.loadPage('myChallenge');
     }
   };
   

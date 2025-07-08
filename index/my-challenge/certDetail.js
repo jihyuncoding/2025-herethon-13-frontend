@@ -32,9 +32,14 @@ window.renderCertDetail = function(certId) {
   const closeBtn = document.getElementById('certDetailCloseBtn');
   if (closeBtn) {
     closeBtn.onclick = function() {
-      if (window.loadPage) window.loadPage('challengeDetail', cert.challengeId);
+      const { pageName, detailKey } = window.getPrevPage?.() || {};
+      if (pageName) {
+        window.loadPage(pageName, detailKey);
+      } else {
+        window.loadPage('challengeDetail', cert.challengeId);
+      }
     };
-  }
+  }  
 
   // === (4) 수정 버튼 ===
   const editBtn = document.getElementById('certEditBtn');

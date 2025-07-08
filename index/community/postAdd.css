@@ -114,6 +114,10 @@ body {
   cursor: pointer;
   z-index: 2;
 }
+.post-add-close-btn img {
+  width: 28px;
+  height: 28px;
+}
 
 .post-add-cert-list {
   display: flex;
