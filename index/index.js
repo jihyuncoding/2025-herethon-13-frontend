@@ -1,3 +1,5 @@
+// ====== index.js (SPA 메인 엔트리, 생략 없이 전체) ======
+
 // --- SPA: 페이지 이름-경로 매핑 ---
 const PAGE_CONFIG = {
   home:            { html: "home.html", js: "" },
@@ -6,8 +8,10 @@ const PAGE_CONFIG = {
   challengeDetail: { html: "my-challenge/challengeDetail.html", js: "my-challenge/challengeDetail.js" },
   certAdd:         { html: "my-challenge/certAdd.html", js: "my-challenge/certAdd.js" },
   certDetail:      { html: "my-challenge/certDetail.html", js: "my-challenge/certDetail.js" },
-  community:       { html: "community/community.html", js: "" }, // 경로 주의!
-  badge:           { html: "badge.html", js: "" }
+  community:       { html: "community/community.html", js: "community/community.js" },
+  communityDetail: { html: "community/communityDetail.html", js: "community/communityDetail.js" },
+  badge:           { html: "badge.html", js: "" },
+  postAdd:         { html: "community/postAdd.html", js: "community/postAdd.js" }
 };
 
 // --- 상세/수정/등록 전역 저장용 ---
@@ -67,6 +71,7 @@ async function loadPage(pageName, detailKey) {
     script.src = jsPath;
     script.id = "dynamic-page-script";
     script.onload = () => {
+      // (공통) community 진입 시 무조건 renderLists() 먼저 호출
       if (window.renderLists) window.renderLists();
       if (window.renderChallengeAdd && pageName === "challengeAdd") {
         window.renderChallengeAdd(currentChallengeAddId);
@@ -79,6 +84,9 @@ async function loadPage(pageName, detailKey) {
       }
       if (window.renderCertDetail && pageName === "certDetail") {
         window.renderCertDetail(currentCertId);
+      }
+      if (window.renderPostAdd && pageName === "postAdd") {
+        window.renderPostAdd();
       }
     };
     document.body.appendChild(script);
