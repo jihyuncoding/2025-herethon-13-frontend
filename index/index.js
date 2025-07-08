@@ -1,13 +1,13 @@
 // --- SPA: 페이지 이름-경로 매핑 ---
 const PAGE_CONFIG = {
-  home:            { html: "home.html", js: "" },
-  myChallenge:     { html: "my-challenge/myChallenge.html", js: "my-challenge/myChallenge.js" },
-  challengeAdd:    { html: "my-challenge/challengeAdd.html", js: "my-challenge/challengeAdd.js" },
+  home: { html: "home/home.html", js: "home/home.js" },
+  myChallenge: { html: "my-challenge/myChallenge.html", js: "my-challenge/myChallenge.js" },
+  challengeAdd: { html: "my-challenge/challengeAdd.html", js: "my-challenge/challengeAdd.js" },
   challengeDetail: { html: "my-challenge/challengeDetail.html", js: "my-challenge/challengeDetail.js" },
-  certAdd:         { html: "my-challenge/certAdd.html", js: "my-challenge/certAdd.js" },
-  certDetail:      { html: "my-challenge/certDetail.html", js: "my-challenge/certDetail.js" },
-  community:       { html: "community/community.html", js: "" }, // 경로 주의!
-  badge:           { html: "badge.html", js: "" }
+  certAdd: { html: "my-challenge/certAdd.html", js: "my-challenge/certAdd.js" },
+  certDetail: { html: "my-challenge/certDetail.html", js: "my-challenge/certDetail.js" },
+  community: { html: "community/community.html", js: "" }, // 경로 주의!
+  badge: { html: "badge.html", js: "" }
 };
 
 // --- 상세/수정/등록 전역 저장용 ---
