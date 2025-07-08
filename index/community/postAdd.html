@@ -1,0 +1,49 @@
+<div class="main-content">
+  <div class="post-add-flexbox">
+    <!-- 좌측: 인증기록 선택 -->
+    <div class="post-add-left">
+      <div class="post-add-title">게시할 인증 기록을 선택해주세요</div>
+      <div class="post-add-cat-row">
+        <button class="post-add-cat-btn selected">학습 / 공부</button>
+        <button class="post-add-cat-btn">커리어 / 직무</button>
+        <button class="post-add-cat-btn">운동 / 건강</button>
+        <button class="post-add-cat-btn">마음 / 루틴</button>
+        <button class="post-add-cat-btn">정리 / 관리</button>
+        <button class="post-add-cat-btn">취미</button>
+      </div>
+      <div class="post-add-challenge-row">
+        <span class="post-add-label">도전 선택</span>
+        <select class="post-add-challenge-select">
+          <option value="">도전을 선택하세요</option>
+          <!-- JS로 도전리스트 채움 -->
+        </select>
+      </div>
+    </div>
+
+    <!-- 구분선 -->
+    <div class="post-add-divider"></div>
+
+    <!-- 우측: 인증기록 리스트/게시 버튼 -->
+    <div class="post-add-right">
+      <button class="post-add-close-btn" title="닫기">&times;</button>
+      <div class="post-add-cert-list">
+        <!-- JS로 인증기록카드 여러개 렌더: 아래 구조 사용 -->
+        <!-- challenge-detail-right의 .challenge-record-card 구조와 100% 일치 -->
+        <!-- 예시 -->
+        <div class="challenge-record-card selected" data-cert-id="1">
+          <div class="record-thumb" style="background:url('이미지경로') center/cover no-repeat;border-radius:10px;width:44px;height:44px;"></div>
+          <div class="record-detail">
+            <div class="record-date">2025.07.08.</div>
+            <div class="record-title">뉴스 기사 번역 써밋</div>
+            <div class="record-content">
+              <span class="record-content-title">오늘은 영어 인터뷰 영상 들으며 쉐도잉 연습!</span><br>
+              <span class="record-content-body">아직 발음은 어색하지만 점점 나아지는 게 느껴져요 ...</span>
+            </div>
+          </div>
+        </div>
+        <!-- 반복: JS로 동적으로 여러개 렌더 -->
+      </div>
+      <button class="post-add-submit-btn" disabled>게시하기</button>
+    </div>
+  </div>
+</div>
