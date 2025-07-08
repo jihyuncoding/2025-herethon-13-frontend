@@ -159,7 +159,7 @@ body {
   padding: 4px 14px;
 }
 
-.detail-title {
+.community-detail-title {
   color: #000;
   font-family: Lato;
   font-size: 15px;
@@ -319,4 +319,15 @@ body {
 }
 .comment-list::-webkit-scrollbar-track {
   background: transparent;
+}
+.detail-delete-btn {
+  background: none;
+  border: none;
+  color: #f24141;
+  font-family: "Segoe UI";
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  margin: 12px 0 20px 38px;
+  align-self: flex-start;
 }

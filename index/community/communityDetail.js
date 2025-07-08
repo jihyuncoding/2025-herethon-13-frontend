@@ -1,7 +1,5 @@
-// ====== communityDetail.js ======
 console.log("communityDetail.js loaded!");
 
-// SPA 환경에서 커뮤니티 상세 페이지 렌더링
 window.renderCommunityDetail = function(postId) {
   // 1) 로컬스토리지에서 포스트 불러오기
   const posts = JSON.parse(localStorage.getItem('communityPosts') || '[]');
@@ -73,6 +71,8 @@ window.renderCommunityDetail = function(postId) {
         <input class="comment-input" type="text" placeholder="댓글을 입력하세요" />
         <button class="comment-send-btn" aria-label="댓글 전송">⤴</button>
       </div>
+      <!-- 삭제하기 버튼 추가 -->
+      <button class="detail-delete-btn">삭제하기</button>
     </aside>
   `;
 
@@ -84,16 +84,12 @@ window.renderCommunityDetail = function(postId) {
   const icon    = likeBtn.querySelector('.like-icon');
   const countEl = container.querySelector('.like-count');
   likeBtn.onclick = () => {
-    // 7.1) 상태 토글
     const isNowLiked = !post.liked;
     post.liked = isNowLiked;
-    // 7.2) 좋아요 수 증감
     post.like = isNowLiked ? post.like + 1 : post.like - 1;
-    // 7.3) UI 업데이트
     likeBtn.classList.toggle('liked', isNowLiked);
     icon.src = isNowLiked ? '/assets/heartfull.svg' : '/assets/heart.svg';
     countEl.textContent = post.like;
-    // 7.4) 로컬스토리지 동기화
     localStorage.setItem('communityPosts', JSON.stringify(posts));
   };
 
@@ -125,5 +121,15 @@ window.renderCommunityDetail = function(postId) {
       </div>
     `);
     inputEl.value = '';
+  };
+
+  // 9) 삭제하기 이벤트
+  const deleteBtn = container.querySelector('.detail-delete-btn');
+  deleteBtn.onclick = () => {
+    if (confirm('정말 이 글을 삭제하시겠습니까?')) {
+      const updatedPosts = posts.filter(p => String(p.id) !== String(postId));
+      localStorage.setItem('communityPosts', JSON.stringify(updatedPosts));
+      window.loadPage('community');
+    }
   };
 };
