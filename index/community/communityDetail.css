@@ -159,7 +159,7 @@ body {
   padding: 4px 14px;
 }
 
-.detail-title {
+.community-detail-title {
   color: #000;
   font-family: Lato;
   font-size: 15px;
@@ -319,4 +319,8 @@ body {
 }
 .comment-list::-webkit-scrollbar-track {
   background: transparent;
+}
+.detail-close-btn img {
+  width: 28px;
+  height: 28px;
 }
