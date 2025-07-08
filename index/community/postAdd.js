@@ -39,7 +39,9 @@ window.renderPostAdd = function () {
 
       <!-- 우측: 인증글/게시버튼 -->
       <div class="post-add-right">
-        <button class="post-add-close-btn" title="닫기">&times;</button>
+         <button class="post-add-close-btn" id="postAddCloseBtn" title="닫기" aria-label="닫기">
+            <img src="../../assets/Cancel.svg" alt="닫기" />
+          </button>
         <div class="post-add-cert-list">
           ${
             !selectedChallengeId
@@ -132,13 +134,19 @@ window.renderPostAdd = function () {
     };
   }
 
-  // 5. 닫기 버튼
+  // 5. 닫기 버튼 (이전 페이지 있으면 복귀, 없으면 community)
   const closeBtn = main.querySelector('.post-add-close-btn');
   if (closeBtn) {
     closeBtn.onclick = function () {
-      if (window.loadPage) window.loadPage('community');
+      const { pageName, detailKey } = window.getPrevPage?.() || {};
+      if (pageName) {
+        window.loadPage(pageName, detailKey);
+      } else {
+        window.loadPage('community');
+      }
     };
   }
+
 };
 
 // 페이지 진입 시 자동 실행 (SPA)

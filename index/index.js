@@ -19,9 +19,22 @@ let currentCertId         = null;
 let currentChallengeAddId = null;
 let currentCertAddId      = null;
 
+// --- [추가] 이전 페이지 저장용 ---
+let prevPageName = null;
+let prevDetailKey = null;
+window.getPrevPage = () => ({ pageName: prevPageName, detailKey: prevDetailKey });
+
 // --- SPA 메인 로더 함수 ---
 async function loadPage(pageName, detailKey) {
   const { html: htmlPath, js: jsPath } = PAGE_CONFIG[pageName] || PAGE_CONFIG["home"];
+
+  // --- [추가] 이전 페이지 정보 저장 ---
+  if (window.currentPageName) {
+    prevPageName = window.currentPageName;
+    prevDetailKey = window.currentDetailKey;
+  }
+  window.currentPageName = pageName;
+  window.currentDetailKey = detailKey;
 
   // (1) HTML 로드
   let html;
@@ -52,15 +65,12 @@ async function loadPage(pageName, detailKey) {
     script.src = jsPath;
     script.id  = "dynamic-page-script";
     script.onload = () => {
-      // community
       if (pageName === "community" && typeof window.init === "function") {
         window.init();
-
       } else if (typeof window.renderLists === "function") {
         window.renderLists();
       }
 
-      // 상세 렌더링
       if (pageName === "communityDetail" && typeof window.renderCommunityDetail === "function") {
         window.renderCommunityDetail(detailKey);
       }
@@ -88,7 +98,7 @@ async function loadPage(pageName, detailKey) {
 }
 
 // --- 전역 getter & loadPage 등록 ---
-window.loadPage             = loadPage;
+window.loadPage              = loadPage;
 window.currentDetailTitle    = () => currentDetailTitle;
 window.currentCertId         = () => currentCertId;
 window.currentChallengeAddId = () => currentChallengeAddId;
@@ -108,4 +118,3 @@ document.querySelectorAll(".sideBar_Box").forEach(btn => {
 window.addEventListener("DOMContentLoaded", () => {
   loadPage("home");
 });
-
