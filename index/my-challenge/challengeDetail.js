@@ -10,7 +10,7 @@ function closeModal(modalId) {
 }
 
 // 상세페이지 렌더 함수 (SPA: loadPage('challengeDetail', challengeId))
-window.renderChallengeDetail = function(challengeKey) {
+window.renderChallengeDetail = function (challengeKey) {
   // ===== (1) 도전 데이터 로딩 및 찾기 =====
   const data = JSON.parse(localStorage.getItem('challenges') || '[]');
   let challenge = data.find(ch =>
@@ -47,9 +47,9 @@ window.renderChallengeDetail = function(challengeKey) {
     const start = new Date(challenge.startDate);
     const end = new Date(challenge.endDate);
     const now = new Date();
-    start.setHours(0,0,0,0);
-    end.setHours(0,0,0,0);
-    now.setHours(0,0,0,0);
+    start.setHours(0, 0, 0, 0);
+    end.setHours(0, 0, 0, 0);
+    now.setHours(0, 0, 0, 0);
     const dPlus = Math.max(0, Math.floor((now - start) / (1000 * 60 * 60 * 24)));
     const dMinus = Math.floor((end - now) / (1000 * 60 * 60 * 24));
     const ddayEls = document.querySelectorAll('.challenge-detail-dday');
@@ -116,7 +116,7 @@ window.renderChallengeDetail = function(challengeKey) {
     const percent = total ? Math.round((done / total) * 100) : 0;
     document.querySelector('.challenge-detail-progress-label').textContent = `진행률 ${percent}% (${done}/${total})`;
     document.getElementById('progressBar').style.width = percent + "%";
-    
+
     // 진행률 100%일 때 모달 표시 (최초 1회)
     if (percent === 100 && !window._badgeModalShown) {
       window._badgeModalShown = true;
@@ -124,7 +124,8 @@ window.renderChallengeDetail = function(challengeKey) {
       document.getElementById('badgeModalCategory').textContent = challenge.category || "";
       document.getElementById('badgeModalTitle').textContent = challenge.title || "";
       openModal('badgeModal');
-    }
+    };
+
     if (percent < 100) {
       window._badgeModalShown = false; // 100% 아래로 내려가면 다시 체크 가능
     }
@@ -166,7 +167,7 @@ window.renderChallengeDetail = function(challengeKey) {
     });
     // 인증글 카드 클릭 → 인증 상세 페이지(SPA) 이동
     recordList.querySelectorAll('.challenge-record-card').forEach(card => {
-      card.onclick = function() {
+      card.onclick = function () {
         const certId = this.getAttribute('data-cert-id');
         if (window.loadPage) window.loadPage('certDetail', certId);
       };
@@ -226,12 +227,12 @@ window.renderChallengeDetail = function(challengeKey) {
         }
       }
     });
-  
+
     // === 월 이동 버튼 동작 추가 ===
     const prevBtn = document.querySelector('.calendar-prev-btn');
     const nextBtn = document.querySelector('.calendar-next-btn');
     if (prevBtn) {
-      prevBtn.onclick = function() {
+      prevBtn.onclick = function () {
         let newYear = year;
         let newMonth = month - 1;
         if (newMonth < 1) {
@@ -243,7 +244,7 @@ window.renderChallengeDetail = function(challengeKey) {
       };
     }
     if (nextBtn) {
-      nextBtn.onclick = function() {
+      nextBtn.onclick = function () {
         let newYear = year;
         let newMonth = month + 1;
         if (newMonth > 12) {
@@ -254,7 +255,7 @@ window.renderChallengeDetail = function(challengeKey) {
         renderCertRecords(); // 월 이동 시 날짜 필터 해제
       };
     }
-  }  
+  }
 
   // ===== (8) 최초 렌더링 =====
   const now = new Date();
@@ -268,7 +269,7 @@ window.renderChallengeDetail = function(challengeKey) {
 
   // ===== (9) 상단/하단 버튼 및 모달 동작 =====
   // 수정하기
-  document.getElementById('editBtn').onclick = function() {
+  document.getElementById('editBtn').onclick = function () {
     if (window.loadPage) window.loadPage('challengeAdd', challenge.id);
   };
   // 인증하기
@@ -302,18 +303,37 @@ window.renderChallengeDetail = function(challengeKey) {
   // 상단 X(닫기)
   const closeBtn = document.getElementById('globalCloseBtn');
   if (closeBtn) {
-    closeBtn.onclick = function() {
+    closeBtn.onclick = function () {
       if (window.loadPage) window.loadPage('myChallenge');
     }
   }
 
   // === 도전 완료 뱃지 모달 버튼 ===
-  document.getElementById('badgeModalYes').onclick = function() {
+  document.getElementById('badgeModalYes').onclick = function () {
     closeModal('badgeModal');
     alert('도전 완료 뱃지가 발급되었습니다!');
-    // 실제 뱃지 지급 로직 추가 예정
-  };
-  document.getElementById('badgeModalNo').onclick = function() {
+    //뱃지 지급
+    // 기존 뱃지 리스트 불러오기 (없으면 빈 배열)
+    let badgeList = JSON.parse(localStorage.getItem("badgeList") || "[]");
+
+    //  이미 이 도전의 뱃지가 저장돼있는지 확인
+    const exists = badgeList.some(b => String(b.challengeId) === String(challenge.id));
+
+    //  없으면 추가
+    if (!exists) {
+      badgeList.push({
+        challengeId: challenge.id,
+        category: challenge.category,
+        title: challenge.title,
+        startDate: challenge.startDate,
+        endDate: challenge.endDate,
+      });
+
+      //  다시 저장
+      localStorage.setItem("badgeList", JSON.stringify(badgeList));
+    }
+  }
+  document.getElementById('badgeModalNo').onclick = function () {
     closeModal('badgeModal');
   };
 };
