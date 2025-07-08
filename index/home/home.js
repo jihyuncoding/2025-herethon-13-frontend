@@ -18,6 +18,18 @@
     // ------ 전역 카테고리 변수 ------
     let selectedCategory = "전체";
 
+    // --- 4. 진행률 계산 (completedGoals/전체 goals) ---
+    function calcProgress(ch) {
+        const certRecords = JSON.parse(localStorage.getItem('certRecords') || '[]');
+        const myCerts = certRecords.filter(r => String(r.challengeId) === String(ch.id));
+        const total = (ch.goals || []).length;
+        const done = (ch.goals || []).filter(goal =>
+            myCerts.some(cert => cert.goal === goal)
+        ).length;
+        if (!total) return 0;
+        return Math.round((done / total) * 100);
+    }
+
     // ------ 리스트/카드 렌더 함수 ------
     function renderLists() {
         const list = document.querySelector('.challenge-list');
@@ -85,8 +97,6 @@
             sideCards.appendChild(div);
         });
     }
-
-
     // ------ 최초 렌더 ------
     renderLists();
 

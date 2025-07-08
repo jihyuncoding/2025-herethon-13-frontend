@@ -1,4 +1,4 @@
-window.renderLists = function() {
+window.renderLists = function () {
     // --- 1. 보조 함수 (스타일) ---
     function makeIconStyle(imgDataUrl) {
         return imgDataUrl
@@ -15,7 +15,7 @@ window.renderLists = function() {
     const tabs = document.querySelectorAll('.challenge-tabs .tab');
     let selectedCategory = "전체";
     tabs.forEach(tab => {
-        tab.onclick = function() {
+        tab.onclick = function () {
             tabs.forEach(t => t.classList.remove('active'));
             this.classList.add('active');
             selectedCategory = this.textContent.trim();
@@ -45,7 +45,7 @@ window.renderLists = function() {
         if (!total) return 0;
         return Math.round((done / total) * 100);
     }
-    
+
 
     // --- 5. 리스트/사이드카드 렌더 함수 ---
     function renderLists() {
@@ -104,7 +104,7 @@ window.renderLists = function() {
                 <div class="challenge-goal">${firstGoal}</div>
             `;
             row.style.cursor = 'pointer';
-            row.onclick = function() {
+            row.onclick = function () {
                 if (window.loadPage) window.loadPage("challengeDetail", ch.id);
             };
             list.appendChild(row);
@@ -120,7 +120,7 @@ window.renderLists = function() {
             .filter(ch => ch.endDate) // 종료일 있는 도전만
             .map(ch => {
                 const end = new Date(ch.endDate);
-                end.setHours(0,0,0,0);
+                end.setHours(0, 0, 0, 0);
                 const remain = Math.max(0, Math.floor((end - now) / (1000 * 60 * 60 * 24)));
                 return { ...ch, remain };
             })
@@ -146,7 +146,7 @@ window.renderLists = function() {
 
             // "인증하러 가기" 클릭 시 certAdd 페이지로 이동
             const link = div.querySelector('.cert-link');
-            link.onclick = function(e) {
+            link.onclick = function (e) {
                 e.preventDefault();
                 if (window.loadPage) window.loadPage("certAdd", ch.id);  // certAdd로 이동!
             };
@@ -161,7 +161,7 @@ window.renderLists = function() {
     // --- 8. 도전 추가 버튼 ---
     const addBtn = document.getElementById('addChallengeBtn');
     if (addBtn) {
-        addBtn.onclick = function() {
+        addBtn.onclick = function () {
             if (window.loadPage) window.loadPage("challengeAdd");
         };
     }
