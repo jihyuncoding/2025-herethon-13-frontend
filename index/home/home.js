@@ -49,7 +49,7 @@
 
         filtered.slice().reverse().forEach(ch => {
             const dDayText = ch.category || '';
-            const percent = ch.progress || 0;
+            const percent = calcProgress(ch);
             const firstGoal = (ch.goals && ch.goals.length > 0) ? ch.goals[0] : '';
             const iconStyle = makeIconStyle(ch.imgDataUrl);
 

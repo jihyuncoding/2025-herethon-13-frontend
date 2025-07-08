@@ -7,7 +7,7 @@ const PAGE_CONFIG = {
   certAdd: { html: "my-challenge/certAdd.html", js: "my-challenge/certAdd.js" },
   certDetail: { html: "my-challenge/certDetail.html", js: "my-challenge/certDetail.js" },
   community: { html: "community/community.html", js: "" }, // 경로 주의!
-  badge: { html: "badge.html", js: "" }
+  badge: { html: "badge/badge.html", js: "badge/badge.js" }
 };
 
 // --- 상세/수정/등록 전역 저장용 ---
