@@ -4,7 +4,7 @@ body {
 }
 
 .container {
-    width: 1237px;
+    width: 1097px;
     height: 800px;
     margin-top: 34px;
     margin-bottom: 30px;
@@ -13,7 +13,8 @@ body {
     border-radius: 10px;
     background: #F7F7F7;
     padding: 60px 170px;
-
+    display: flex;
+    position: absolute;
 }
 
 .spa-bg {
@@ -36,24 +37,21 @@ body {
 
 /*로고*/
 .logo {
-    position: relative;
-    top: 421px;
-    left: 167px;
-    color: #000;
-    font-family: Roboto;
-    font-size: 40px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 48px;
-    align-self: stretch;
+    position: absolute;
+    left: 100px;
+    top: 185px;
+    width: 467px;
+    height: 467px;
+    flex-shrink: 0;
+    aspect-ratio: 1/1;
+    margin-left: 141px;
 }
 
 /*로그인,회원가입, 버튼 박스*/
 .mainBox {
-    position: relative;
-    top: 321px;
-    left: 647px;
-
+    position: absolute;
+    top: 277px;
+    right: 200px;
 }
 
 /*로그인 회원가입 각각의 박스*/

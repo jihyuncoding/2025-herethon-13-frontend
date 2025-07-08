@@ -1,16 +1,16 @@
 // --- SPA: 페이지 이름-경로 매핑 ---
 const PAGE_CONFIG = {
-  home:            { html: "home.html",                    js: "" },
-  mypage:          { html: "mypage/mypage.html",           js: "mypage/mypage.js" },
-  myChallenge:     { html: "my-challenge/myChallenge.html", js: "my-challenge/myChallenge.js" },
-  challengeAdd:    { html: "my-challenge/challengeAdd.html", js: "my-challenge/challengeAdd.js" },
+  home:            { html: "home/home.html",                  js: "home/home.js" },
+  mypage:          { html: "mypage/mypage.html",              js: "mypage/mypage.js" },
+  myChallenge:     { html: "my-challenge/myChallenge.html",   js: "my-challenge/myChallenge.js" },
+  challengeAdd:    { html: "my-challenge/challengeAdd.html",  js: "my-challenge/challengeAdd.js" },
   challengeDetail: { html: "my-challenge/challengeDetail.html", js: "my-challenge/challengeDetail.js" },
-  certAdd:         { html: "my-challenge/certAdd.html",      js: "my-challenge/certAdd.js" },
-  certDetail:      { html: "my-challenge/certDetail.html",   js: "my-challenge/certDetail.js" },
-  community:       { html: "community/community.html",       js: "community/community.js" },
-  communityDetail: { html: "community/communityDetail.html", js: "community/communityDetail.js" },
-  badge:           { html: "badge.html",                     js: "" },
-  postAdd:         { html: "community/postAdd.html",         js: "community/postAdd.js" }
+  certAdd:         { html: "my-challenge/certAdd.html",       js: "my-challenge/certAdd.js" },
+  certDetail:      { html: "my-challenge/certDetail.html",    js: "my-challenge/certDetail.js" },
+  community:       { html: "community/community.html",        js: "community/community.js" },
+  communityDetail: { html: "community/communityDetail.html",  js: "community/communityDetail.js" },
+  postAdd:         { html: "community/postAdd.html",          js: "community/postAdd.js" },
+  badge:           { html: "badge.html",                      js: "" }
 };
 
 // --- 상세/수정/등록 전역 저장용 ---
@@ -52,40 +52,33 @@ async function loadPage(pageName, detailKey) {
     script.src = jsPath;
     script.id  = "dynamic-page-script";
     script.onload = () => {
-      // ● community 페이지 진입 시
+      // community
       if (pageName === "community" && typeof window.init === "function") {
         window.init();
 
-      // ● 그 외, renderLists() 가 정의된 모든 페이지
       } else if (typeof window.renderLists === "function") {
         window.renderLists();
       }
 
-      // communityDetail 페이지
+      // 상세 렌더링
       if (pageName === "communityDetail" && typeof window.renderCommunityDetail === "function") {
         window.renderCommunityDetail(detailKey);
       }
-      // postAdd 페이지
       if (pageName === "postAdd" && typeof window.renderPostAdd === "function") {
         window.renderPostAdd(detailKey);
       }
-      // mypage
       if (pageName === "mypage" && typeof window.renderMyPage === "function") {
         window.renderMyPage();
       }
-      // challengeAdd
       if (pageName === "challengeAdd" && typeof window.renderChallengeAdd === "function") {
         window.renderChallengeAdd(currentChallengeAddId);
       }
-      // challengeDetail
       if (pageName === "challengeDetail" && typeof window.renderChallengeDetail === "function") {
         window.renderChallengeDetail(currentDetailTitle);
       }
-      // certAdd
       if (pageName === "certAdd" && typeof window.renderCertAdd === "function") {
         window.renderCertAdd(currentCertAddId);
       }
-      // certDetail
       if (pageName === "certDetail" && typeof window.renderCertDetail === "function") {
         window.renderCertDetail(currentCertId);
       }
@@ -115,3 +108,4 @@ document.querySelectorAll(".sideBar_Box").forEach(btn => {
 window.addEventListener("DOMContentLoaded", () => {
   loadPage("home");
 });
+
