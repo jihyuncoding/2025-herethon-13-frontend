@@ -235,7 +235,14 @@ window.renderChallengeDetail = function(challengeKey) {
   // ===== 버튼 바인딩 =====
   document.getElementById('editBtn').onclick = () => window.loadPage && window.loadPage('challengeAdd', challenge.id);
   document.getElementById('certBtn').onclick = () => window.loadPage && window.loadPage('certAdd', challenge.id);
-  document.getElementById('globalCloseBtn').onclick = () => window.loadPage && window.loadPage('myChallenge');
+  document.getElementById('globalCloseBtn').onclick = () => {
+    if (window.history.length > 1) {
+      window.history.back(); // 이전 페이지로
+    } else {
+      window.loadPage && window.loadPage('myChallenge'); // 없으면 기본 페이지로
+    }
+  };
+  
 
   document.getElementById('deleteBtn').onclick = function () {
     document.getElementById('modalCategory').textContent = challenge.category || "";
