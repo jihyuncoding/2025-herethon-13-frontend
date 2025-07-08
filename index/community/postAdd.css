@@ -2,7 +2,6 @@ body {
   background: #f7f7f8;
   margin: 0;
   padding: 0;
-  font-family: 'Segoe UI', 'Roboto', 'Lato', sans-serif;
 }
 
 .main-content {
@@ -17,10 +16,9 @@ body {
   height: 918px;
   margin: 32px auto 0px auto;
   background: #fff;
-  border-radius: 14px;
+  border-radius: 10px;
   display: flex;
   position: relative;
-  box-shadow: 0 2px 16px 0 rgba(70,70,90,0.04);
 }
 
 .post-add-left {

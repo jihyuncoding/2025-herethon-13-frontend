@@ -42,23 +42,34 @@
         <div class="comment-item">
           <div class="comment-profile"></div>
           <div class="comment-right">
-            <span class="comment-writer">김수정</span>
-            <span class="comment-date">2025.07.08. 23:11</span>
+            <!-- 헤더: 작성자+날짜 -->
+            <div class="comment-header">
+              <span class="comment-writer">김수정</span>
+              <span class="comment-date">2025.07.08. 23:11</span>
+            </div>
+            <!-- 내용 -->
             <div class="comment-content">댓글내용</div>
           </div>
         </div>
         <div class="comment-item">
           <div class="comment-profile"></div>
           <div class="comment-right">
-            <span class="comment-writer">김수정</span>
-            <span class="comment-date">2025.07.08. 23:11</span>
+            <div class="comment-header">
+              <span class="comment-writer">김수정</span>
+              <span class="comment-date">2025.07.08. 23:11</span>
+            </div>
             <div class="comment-content">댓글내용</div>
           </div>
         </div>
-      </div>
-      <div class="comment-input-row">
-        <input type="text" class="comment-input" placeholder="댓글을 입력하세요" />
-        <button class="comment-send-btn">⤴</button>
+        <div class="comment-input-row">
+          <input
+            class="comment-input"
+            type="text"
+            placeholder="댓글을 입력하세요"
+          />
+          <button class="comment-send-btn" aria-label="댓글 전송">
+            ↑
+          </button>
       </div>
     </aside>
   </div>
