@@ -20,7 +20,6 @@ body {
     height: 30px;
     width: 768px;
     display: flex;
-    display: flex;
     align-items: center;
 }
 
@@ -57,7 +56,6 @@ body {
     display: flex;
     align-items: center;
     padding-left: 8px;
-
 }
 
 .dropdown {
@@ -138,7 +136,6 @@ body {
     background-color: transparent;
     overflow-y: auto;
     overflow-x: hidden;
-    z-index: 5;
 }
 
 .home-listBox::-webkit-scrollbar {
@@ -191,14 +188,17 @@ body {
 
 .home-suggestBox {
     width: 274px;
-    height: 375px;
     flex-shrink: 0;
     border-radius: 10px;
     background: #FFF;
-    margin-left: 25px;
+    margin-left: 15px;
     margin-top: 9px;
     padding-top: 16px;
+    padding-left: 17px;
+    display: flex;
+    flex-direction: column;
 }
+
 
 .home-suggestTitle {
     color: #000;
@@ -207,9 +207,79 @@ body {
     font-style: normal;
     font-weight: 600;
     line-height: normal;
-    margin-left: 17px;
 }
 
+.home-randomCategory {
+    color: #757575;
+    font-family: "Segoe UI";
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-top: 17px;
+}
+
+.home-randomChallengeTitle {
+    color: #000;
+    font-family: "Segoe UI";
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-bottom: 11px;
+}
+
+.home-randomDetailTitle {
+    color: #757575;
+    font-family: "Segoe UI";
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-top: 7px;
+    margin-bottom: 7px;
+}
+
+.home-randomDetailGoals {
+    width: 245px;
+    height: 30px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    background: rgba(255, 222, 91, 0.18);
+    color: #000;
+    font-family: "Segoe UI";
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 15px;
+    margin-bottom: 7px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 8px;
+}
+
+.home-randomAddBtn {
+    width: 112px;
+    height: 30px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    background: #605BFF;
+    margin-left: 7px;
+    border: none;
+    color: #FFF;
+    font-family: "Segoe UI";
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 15px;
+    display: flex;
+    align-items: center;
+    padding-left: 8px;
+    margin-top: 39px;
+    margin-left: 137px;
+    margin-bottom: 13px;
+}
 
 .home-middleBox {
     width: 768px;
@@ -221,7 +291,7 @@ body {
 .home-side-cards {
     display: flex;
     flex-direction: row;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     overflow-x: auto;
     overflow-y: hidden;
     gap: 26px;
