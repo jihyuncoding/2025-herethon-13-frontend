@@ -10,7 +10,7 @@ const PAGE_CONFIG = {
   community:       { html: "community/community.html",        js: "community/community.js" },
   communityDetail: { html: "community/communityDetail.html",  js: "community/communityDetail.js" },
   postAdd:         { html: "community/postAdd.html",          js: "community/postAdd.js" },
-  badge:           { html: "badge.html",                      js: "" }
+  badge:           { html: "badge/badge.html",                js: "badge/badge.js" }
 };
 
 // --- 상세/수정/등록 전역 저장용 ---

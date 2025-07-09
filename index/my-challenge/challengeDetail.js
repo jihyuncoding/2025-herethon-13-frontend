@@ -276,10 +276,31 @@ window.renderChallengeDetail = function(challengeKey) {
     if (window.loadPage) window.loadPage('myChallenge');
   };
 
+// === 도전 완료 뱃지 모달 버튼 ===
   document.getElementById('badgeModalYes').onclick = function () {
     closeModal('badgeModal');
     alert('도전 완료 뱃지가 발급되었습니다!');
-  };
+    //뱃지 지급
+    // 기존 뱃지 리스트 불러오기 (없으면 빈 배열)
+    let badgeList = JSON.parse(localStorage.getItem("badgeList") || "[]");
+
+    //  이미 이 도전의 뱃지가 저장돼있는지 확인
+    const exists = badgeList.some(b => String(b.challengeId) === String(challenge.id));
+
+    //  없으면 추가
+    if (!exists) {
+      badgeList.push({
+        challengeId: challenge.id,
+        category: challenge.category,
+        title: challenge.title,
+        startDate: challenge.startDate,
+        endDate: challenge.endDate,
+      });
+
+      //  다시 저장
+      localStorage.setItem("badgeList", JSON.stringify(badgeList));
+    }
+  }
   document.getElementById('badgeModalNo').onclick = function () {
     closeModal('badgeModal');
   };
