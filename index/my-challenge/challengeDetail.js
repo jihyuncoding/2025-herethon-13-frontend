@@ -10,7 +10,7 @@ function closeModal(modalId) {
 }
 
 // 상세페이지 렌더 함수
-window.renderChallengeDetail = function(challengeKey) {
+window.renderChallengeDetail = function (challengeKey) {
   const data = JSON.parse(localStorage.getItem('challenges') || '[]');
   let challenge = data.find(ch =>
     String(ch.id) === String(challengeKey) || ch.title === challengeKey
@@ -43,9 +43,9 @@ window.renderChallengeDetail = function(challengeKey) {
     const start = new Date(challenge.startDate);
     const end = new Date(challenge.endDate);
     const now = new Date();
-    start.setHours(0,0,0,0);
-    end.setHours(0,0,0,0);
-    now.setHours(0,0,0,0);
+    start.setHours(0, 0, 0, 0);
+    end.setHours(0, 0, 0, 0);
+    now.setHours(0, 0, 0, 0);
     const dPlus = Math.max(0, Math.floor((now - start) / (1000 * 60 * 60 * 24)));
     const dMinus = Math.floor((end - now) / (1000 * 60 * 60 * 24));
     const ddayEls = document.querySelectorAll('.challenge-detail-dday');
@@ -136,9 +136,9 @@ window.renderChallengeDetail = function(challengeKey) {
       recordList.innerHTML += `
         <div class="challenge-record-card" data-cert-id="${cert.id}">
           <div class="record-thumb" style="${cert.imgDataUrl
-            ? `background:url('${cert.imgDataUrl}') center/cover no-repeat;`
-            : `background:#e9e9e9;`
-          }border-radius:10px;width:44px;height:44px;"></div>
+          ? `background:url('${cert.imgDataUrl}') center/cover no-repeat;`
+          : `background:#e9e9e9;`
+        }border-radius:10px;width:44px;height:44px;"></div>
           <div class="record-detail">
             <div class="record-date">${cert.date.replaceAll('-', '.')}.</div>
             <div class="record-title">${cert.goal}</div>
@@ -243,7 +243,7 @@ window.renderChallengeDetail = function(challengeKey) {
       window.loadPage('myChallenge');
     }
   };
-  
+
 
   document.getElementById('deleteBtn').onclick = function () {
     document.getElementById('modalCategory').textContent = challenge.category || "";
@@ -270,13 +270,17 @@ window.renderChallengeDetail = function(challengeKey) {
     let posts = JSON.parse(localStorage.getItem('communityPosts') || '[]');
     posts = posts.filter(p => !deletedCertIds.includes(p.certId));
     localStorage.setItem('communityPosts', JSON.stringify(posts));
+    //4. 뱃지 삭제
+    let badgeList = JSON.parse(localStorage.getItem('badgeList') || '[]');
+    badgeList = badgeList.filter(b => String(b.challengeId) !== String(challenge.id));
+    localStorage.setItem('badgeList', JSON.stringify(badgeList));
 
     closeModal('deleteModal');
     alert('도전이 삭제되었습니다.');
     if (window.loadPage) window.loadPage('myChallenge');
   };
 
-// === 도전 완료 뱃지 모달 버튼 ===
+  // === 도전 완료 뱃지 모달 버튼 ===
   document.getElementById('badgeModalYes').onclick = function () {
     closeModal('badgeModal');
     alert('도전 완료 뱃지가 발급되었습니다!');
