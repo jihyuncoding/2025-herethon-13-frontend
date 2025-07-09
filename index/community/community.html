@@ -1,171 +1,43 @@
 <div class="main-content">
-    <!-- 상단 검색바 -->
-    <div class="header-bar">
-        <div class="search-bar">
-          <img class="search-icon" src="../../assets/Search.svg" alt="검색" />
-          <input class="search-input" type="text" placeholder="관심있는 도전기록을 검색해보세요" />
-          <button class="search-btn">검색</button>
+  <!-- 상단 검색바 -->
+  <div class="header-bar">
+    <div class="search-bar">
+      <img class="search-icon" src="../../assets/Search.svg" alt="검색" />
+      <input class="search-input" type="text" placeholder="관심있는 도전기록을 검색해보세요" />
+      <button class="search-btn">검색</button>
+    </div>
+  </div>
+
+  <!-- 커뮤니티 메인 -->
+  <section class="community-main-section">
+    <div class="community-top-row">
+      <!-- 카테고리 -->
+      <div class="category-box">
+        <div class="category-title">카테고리</div>
+        <div class="category-vertical-scroll">
+          <div class="category-item selected">학습 / 공부 <span class="category-count">15 Posts</span></div>
+          <div class="category-item">커리어 / 직무 <span class="category-count">8 Posts</span></div>
+          <div class="category-item">운동 / 건강 <span class="category-count">10 Posts</span></div>
+          <div class="category-item">마음 / 루틴 <span class="category-count">5 Posts</span></div>
+          <div class="category-item">정리 / 관리 <span class="category-count">7 Posts</span></div>
+          <div class="category-item">취미 <span class="category-count">4 Posts</span></div>
+          <div class="category-item">기타 <span class="category-count">2 Posts</span></div>
         </div>
       </div>
-      
-    
-    <!-- 커뮤니티 메인 -->
-    <section class="community-main-section">
-      <!-- 상단 카테고리 & 인기 POST -->
-      <div class="community-top-row">
-        <!-- 카테고리 -->
-        <div class="category-box">
-            <div class="category-title">카테고리</div>
-            <div class="category-vertical-scroll">
-              <div class="category-item selected">학습 / 공부 <span class="category-count">15 Posts</span></div>
-              <div class="category-item">커리어 / 직무 <span class="category-count">8 Posts</span></div>
-              <div class="category-item">운동 / 건강 <span class="category-count">10 Posts</span></div>
-              <div class="category-item">마음 / 루틴 <span class="category-count">5 Posts</span></div>
-              <div class="category-item">정리 / 관리 <span class="category-count">7 Posts</span></div>
-              <div class="category-item">취미 <span class="category-count">4 Posts</span></div>
-              <div class="category-item">기타 <span class="category-count">2 Posts</span></div>
-              <!-- ...더 추가해도 됨! -->
-            </div>
-        </div>          
-        <!-- 인기 POST -->
-        <div class="popular-posts-box">
-            <div class="popular-posts-title">인기 POST</div>
-            <div class="popular-post-list">
-              <div class="popular-post-item">
-                <div class="popular-post-thumb"></div>
-                <div class="popular-post-content">
-                  <div class="popular-post-title">Day 4 / 오늘은 영어 인터뷰 영상 들으며 쉐도잉 연습!</div>
-                  <div class="popular-post-desc">아직 발음은 어색하지만 점점 나아지는 게 느껴져요</div>
-                </div>
-                <div class="popular-post-like">
-                  <span class="like-icon">♡</span>
-                  <span class="like-count">254</span>
-                </div>
-              </div>
-              <div class="popular-post-item">
-                <div class="popular-post-thumb"></div>
-                <div class="popular-post-content">
-                  <div class="popular-post-title">Day 4 / 오늘은 영어 인터뷰 영상 들으며 쉐도잉 연습!</div>
-                  <div class="popular-post-desc">아직 발음은 어색하지만 점점 나아지는 게 느껴져요</div>
-                </div>
-                <div class="popular-post-like">
-                  <span class="like-icon">♡</span>
-                  <span class="like-count">254</span>
-                </div>
-              </div>
-              <div class="popular-post-item">
-                <div class="popular-post-thumb"></div>
-                <div class="popular-post-content">
-                  <div class="popular-post-title">Day 4 / 오늘은 영어 인터뷰 영상 들으며 쉐도잉 연습!</div>
-                  <div class="popular-post-desc">아직 발음은 어색하지만 점점 나아지는 게 느껴져요</div>
-                </div>
-                <div class="popular-post-like">
-                  <span class="like-icon">♡</span>
-                  <span class="like-count">254</span>
-                </div>
-              </div>
-            </div>
-          </div>          
-      </div>
-      
-      <!-- 게시글 리스트 -->
-      <div class="post-list-outer">
-      <div class="post-list-wrap">
-        <!-- 게시글 카드: 반복 -->
-        <div class="post-card">
-            <div class="post-thumb-area">
-              <!-- 썸네일 영역 (이미지 없는 경우 연회색) -->
-              <div class="post-thumb"></div>
-              <div class="post-like-badge">
-                서현 | <span class="like-heart">♡</span> 232
-              </div>
-            </div>
-            <div class="post-content-area">
-              <div class="challenge-name">도전이름</div>
-              <div class="post-title">게시글 제목</div>
-            </div>
-        </div>
-        <div class="post-card">
-            <div class="post-thumb-area">
-              <!-- 썸네일 영역 (이미지 없는 경우 연회색) -->
-              <div class="post-thumb"></div>
-              <div class="post-like-badge">
-                서현 | <span class="like-heart">♡</span> 232
-              </div>
-            </div>
-            <div class="post-content-area">
-              <div class="challenge-name">도전이름</div>
-              <div class="post-title">게시글 제목</div>
-            </div>
-        </div>
-        <div class="post-card">
-            <div class="post-thumb-area">
-              <!-- 썸네일 영역 (이미지 없는 경우 연회색) -->
-              <div class="post-thumb"></div>
-              <div class="post-like-badge">
-                서현 | <span class="like-heart">♡</span> 232
-              </div>
-            </div>
-            <div class="post-content-area">
-              <div class="challenge-name">도전이름</div>
-              <div class="post-title">게시글 제목</div>
-            </div>
-        </div>
-        <div class="post-card">
-            <div class="post-thumb-area">
-              <!-- 썸네일 영역 (이미지 없는 경우 연회색) -->
-              <div class="post-thumb"></div>
-              <div class="post-like-badge">
-                서현 | <span class="like-heart">♡</span> 232
-              </div>
-            </div>
-            <div class="post-content-area">
-              <div class="challenge-name">도전이름</div>
-              <div class="post-title">게시글 제목</div>
-            </div>
-        </div>
-        <div class="post-card">
-            <div class="post-thumb-area">
-              <!-- 썸네일 영역 (이미지 없는 경우 연회색) -->
-              <div class="post-thumb"></div>
-              <div class="post-like-badge">
-                서현 | <span class="like-heart">♡</span> 232
-              </div>
-            </div>
-            <div class="post-content-area">
-              <div class="challenge-name">도전이름</div>
-              <div class="post-title">게시글 제목</div>
-            </div>
-        </div>
-        <div class="post-card">
-            <div class="post-thumb-area">
-              <!-- 썸네일 영역 (이미지 없는 경우 연회색) -->
-              <div class="post-thumb"></div>
-              <div class="post-like-badge">
-                서현 | <span class="like-heart">♡</span> 232
-              </div>
-            </div>
-            <div class="post-content-area">
-              <div class="challenge-name">도전이름</div>
-              <div class="post-title">게시글 제목</div>
-            </div>
-        </div>
-        <div class="post-card">
-            <div class="post-thumb-area">
-              <!-- 썸네일 영역 (이미지 없는 경우 연회색) -->
-              <div class="post-thumb"></div>
-              <div class="post-like-badge">
-                서현 | <span class="like-heart">♡</span> 232
-              </div>
-            </div>
-            <div class="post-content-area">
-              <div class="challenge-name">도전이름</div>
-              <div class="post-title">게시글 제목</div>
-            </div>
-        </div>
-        
+
+      <!-- 인기 POST -->
+      <div class="popular-posts-box">
+        <div class="popular-posts-title">인기 POST</div>
+        <div class="popular-post-list"></div> 
       </div>
     </div>
-    </section>
-    <button class="post-add-btn">게시글 올리기</button>
-  </div>
+
+    <!-- 게시글 리스트 -->
+    <div class="post-list-outer">
+      <div class="post-list-wrap"></div> 
+    </div>
+  </section>
+
+  <!-- 게시글 작성 버튼 -->
+  <button class="post-add-btn">게시글 올리기</button>
+</div>

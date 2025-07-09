@@ -27,6 +27,7 @@ window.renderCommunityDetail = function(postId) {
   // 5) innerHTML로 구조 렌더
   container.innerHTML = `
     <div class="detail-main">
+      <button class="detail-delete-btn">삭제하기</button>
       <div class="detail-thumbnail" style="${
         post.imgDataUrl ? `background:url('${post.imgDataUrl}') center/cover no-repeat; background-size:cover;` : ''
       }"></div>
@@ -73,7 +74,6 @@ window.renderCommunityDetail = function(postId) {
         <input class="comment-input" type="text" placeholder="댓글을 입력하세요" />
         <button class="comment-send-btn" aria-label="댓글 전송">⤴</button>
       </div>
-      <button class="detail-delete-btn">삭제하기</button>
     </aside>
   `;
 

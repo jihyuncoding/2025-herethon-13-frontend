@@ -18,7 +18,9 @@ body {
   border-radius: 10px;
   display: flex;
   position: relative;
-  overflow: hidden;
+  height: auto;           
+  min-height: 918px;  
+  overflow: visible;     
 }
 
 .detail-main {
@@ -36,6 +38,7 @@ body {
   height: 674px;
   background: #d1d1d1;
   border-radius: 6px;
+  margin-top: 30px;
   margin-bottom: 22px;
 }
 
@@ -45,7 +48,6 @@ body {
   min-width: 0;
 }
 
-/* 👍 좋아요 & 📅 날짜 */
 .detail-like-fixed {
   position: absolute;
   top: 0;
@@ -89,13 +91,12 @@ body {
   line-height: 20px;
 }
 
-/* 작성자 및 메타정보 */
 .detail-row {
   display: flex;
   align-items: center;
   gap: 8px;
   margin-bottom: 10px;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .profile-image {
@@ -166,7 +167,6 @@ body {
   font-style: normal;
   font-weight: 500;
   line-height: 1.6;
-  margin: 12px 0 7px 0;
   letter-spacing: -0.6px;
 }
 
@@ -177,9 +177,12 @@ body {
   font-style: normal;
   font-weight: 500;
   line-height: 1.8;
-  word-break: keep-all;
+  word-break: break-word;
   margin-bottom: 30px;
+  white-space: pre-line;      
+  text-indent: 1.2em;          
 }
+
 
 .detail-comments {
   width: 400px;
@@ -232,7 +235,6 @@ body {
   flex-direction: column;
 }
 
-/* 작성자·날짜 헤더 */
 .comment-header {
   display: flex;
   justify-content: space-between;
@@ -255,7 +257,7 @@ body {
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
-  line-height: 20px; /* 142.857% */
+  line-height: 20px; 
   white-space: nowrap;
 }
 
@@ -309,18 +311,43 @@ body {
   justify-content: center;
 }
 
-/* 스크롤바 커스텀 */
 .comment-list::-webkit-scrollbar {
   width: 6px;
 }
+
 .comment-list::-webkit-scrollbar-thumb {
   background: #ededed;
   border-radius: 10px;
 }
+
 .comment-list::-webkit-scrollbar-track {
   background: transparent;
 }
+
 .detail-close-btn img {
   width: 28px;
   height: 28px;
+}
+
+.detail-delete-btn {
+  position: absolute;
+  top: 30px;
+  left : 600px;
+  background: #5B5FEF;
+  color: #FFF;
+  font-family: "Segoe UI";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 15px;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  z-index: 3;
+  transition: background 0.2s ease;
+}
+
+.detail-delete-btn:hover {
+  background: #4a4cce;
 }
