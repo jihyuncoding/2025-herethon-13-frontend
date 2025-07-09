@@ -425,24 +425,23 @@ body {
 }
 
 .home-categoryBtn {
-    width: 162.643px;
-    height: 53px;
-    flex-shrink: 0;
+    padding: 10px 16px;
     border-radius: 10px;
-    background: transparent;
-    color: black;
-    font-family: Lato;
+    background: #f6f6fc;
+    color: #000;
     font-size: 14px;
-    font-style: normal;
-    font-weight: 900;
-    line-height: normal;
-    border: none;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    white-space: nowrap;
 }
 
-.home-categoryBtn.selected,
-.home-categoryBtn:hover {
+.home-categoryBtn.selected {
     background: #605BFF;
-    color: #fff;
+    color: #FFF;
+    font-weight: 900;
 }
 
 .home-categoryBox::-webkit-scrollbar {

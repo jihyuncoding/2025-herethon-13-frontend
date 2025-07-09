@@ -217,8 +217,7 @@
       if (window.loadPage) window.loadPage("challengeAdd");
     };
   }
-
-  //랜덤 추천 챌린지
+  //랜덤 챌린지 추천
   let currentRecommendedChallenge = null;
 
   function renderRandomChallenge() {
@@ -232,42 +231,26 @@
 
       console.log(' 랜덤으로 뽑힌 도전:', randomChallenge);
 
-      container.querySelector('.home-randomCategory').textContent = randomChallenge.category || '';
-      container.querySelector('.home-randomChallengeTitle').textContent = randomChallenge.title || '';
+      const { category = '', title = '', goals = [] } = randomChallenge;
 
-      // 기존 goal div 제거
-      container.querySelectorAll('.home-randomDetailGoals').forEach(el => el.remove());
-      const existingBtn = container.querySelector('.home-randomAddBtn');
-      if (existingBtn) existingBtn.remove();
-
-      const detailTitle = container.querySelector('.home-randomDetailTitle');
-      const goals = randomChallenge.goals || [];
-
+      let goalsHTML = '';
       if (goals.length === 0) {
-        const emptyDiv = document.createElement('div');
-        emptyDiv.className = 'home-randomDetailGoals';
-        emptyDiv.textContent = '세부 목표가 없습니다.';
-        detailTitle.insertAdjacentElement('afterend', emptyDiv);
+        goalsHTML = `<div class="home-randomDetailGoals">세부 목표가 없습니다.</div>`;
       } else {
-        let lastInserted = detailTitle;
-        goals.forEach(goal => {
-          const goalDiv = document.createElement('div');
-          goalDiv.className = 'home-randomDetailGoals';
-          goalDiv.textContent = goal;
-          lastInserted.insertAdjacentElement('afterend', goalDiv);
-          lastInserted = goalDiv;
-        });
+        goalsHTML = goals.map(goal => `<div class="home-randomDetailGoals">${goal}</div>`).join('');
       }
 
-      // 도전 추가하기 버튼 생성
-      const addBtn = document.createElement('button');
-      addBtn.className = 'home-randomAddBtn';
-      addBtn.innerHTML = `
-        <img class="home-plusImg" src="../assets/homePlus.svg" alt="추가" />
-        도전 추가하기
+      container.innerHTML = `
+        <div class="home-randomChallengeTitle">김정수님의 Challenge </div>
+        <div class="home-randomCategory">${category}</div>
+        <div class="home-randomChallengeTitle">${title}</div>
+        <div class="home-randomDetailTitle">세부 목표</div>
+        ${goalsHTML}
+        <button class="home-randomAddBtn">
+          <img class="home-plusImg" src="../assets/homePlus.svg" alt="추가" />
+          도전 추가하기
+        </button>
       `;
-      container.appendChild(addBtn);
-
     } else {
       container.innerHTML = `<div style="padding:32px;color:#666;"> 저장된 도전이 없습니다.</div>`;
     }
