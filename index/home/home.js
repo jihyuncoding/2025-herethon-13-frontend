@@ -12,7 +12,8 @@
       : 'background:#d9d9d9;border-radius:12px;';
   }
 
-  let selectedCategory = "전체";
+  let selectedCategory = "전체"; //드롭박스 카테고리
+  let postCategoryFilter = "전체"; //인기포스트 카테고리
 
   // ------ 도전 리스트 및 사이드 카드 렌더링 ------
   function renderLists() {
@@ -106,35 +107,54 @@
     });
   }
 
+  document.querySelectorAll('.home-category-item').forEach(item => {
+    item.addEventListener('click', () => {
+      document.querySelectorAll('.home-category-item').forEach(i =>
+        i.classList.remove('selected')
+      );
+      item.classList.add('selected');
+
+      const textNode = Array.from(item.childNodes).find(n => n.nodeType === Node.TEXT_NODE);
+      postCategoryFilter = textNode
+        ? textNode.textContent.trim()
+        : item.textContent.replace(/\d+\s*Posts?/, '').trim();
+      renderPopularPosts();
+    });
+  });
+
   // ------ 인기 포스트 렌더링 ------
   function renderPopularPosts() {
     const postClassPrefix = 'home-';
     let posts = JSON.parse(localStorage.getItem('communityPosts') || '[]');
-    posts = posts.sort((a, b) => (b.like || 0) - (a.like || 0));
+
+    const filteredPosts = postCategoryFilter === "전체"
+      ? posts
+      : posts.filter(p => p.category === postCategoryFilter);
+
+    const sorted = filteredPosts.sort((a, b) => (b.like || 0) - (a.like || 0));
 
     const popularList = document.querySelector(`.${postClassPrefix}popular-post-list`);
     if (!popularList) return;
-
     popularList.innerHTML = '';
 
-    posts.slice(0, 3).forEach(post => {
+    sorted.slice(0, 3).forEach(post => {
       const thumbStyle = post.imgDataUrl
         ? `background:url('${post.imgDataUrl}') center/cover no-repeat;`
         : '';
 
       popularList.innerHTML += `
-          <div class="${postClassPrefix}popular-post-item" data-post-id="${post.id}" style="cursor:pointer;">
-            <div class="${postClassPrefix}popular-post-thumb" style="${thumbStyle}"></div>
-            <div class="${postClassPrefix}popular-post-content">
-              <div class="${postClassPrefix}popular-post-title">${post.title || ''}</div>
-              <div class="${postClassPrefix}popular-post-desc">${post.challengeTitle || ''}</div>
-            </div>
-            <div class="${postClassPrefix}popular-post-like">
-              <span class="like-icon">♡</span>
-              <span class="like-count">${post.like || 0}</span>
-            </div>
+        <div class="${postClassPrefix}popular-post-item" data-post-id="${post.id}" style="cursor:pointer;">
+          <div class="${postClassPrefix}popular-post-thumb" style="${thumbStyle}"></div>
+          <div class="${postClassPrefix}popular-post-content">
+            <div class="${postClassPrefix}popular-post-title">${post.title || ''}</div>
+            <div class="${postClassPrefix}popular-post-desc">${post.challengeTitle || ''}</div>
           </div>
-        `;
+          <div class="${postClassPrefix}popular-post-like">
+            <span class="like-icon">♡</span>
+            <span class="like-count">${post.like || 0}</span>
+          </div>
+        </div>
+      `;
     });
 
     popularList.querySelectorAll(`.${postClassPrefix}popular-post-item`).forEach(item => {
@@ -147,19 +167,20 @@
   // ------ 카테고리별 글 수 업데이트 ------
   function updateCategoryCounts() {
     const posts = JSON.parse(localStorage.getItem('communityPosts') || '[]');
-    document.querySelectorAll('.category-item').forEach(item => {
+    document.querySelectorAll('.home-category-item').forEach(item => {
       const textNode = Array.from(item.childNodes).find(n => n.nodeType === Node.TEXT_NODE);
       const catName = textNode
         ? textNode.textContent.trim()
         : item.textContent.replace(/\d+\s*Posts?/, '').trim();
 
-      const filtered = posts.filter(p => p.category === catName);
+      let filtered = posts.filter(p => p.category === catName);
+
       const count = filtered.length;
 
-      let span = item.querySelector('.category-count');
+      let span = item.querySelector('.home-category-count');
       if (!span) {
         span = document.createElement('span');
-        span.className = 'category-count';
+        span.className = 'home-category-count';
         item.appendChild(span);
       }
       span.textContent = `${count} Posts`;
