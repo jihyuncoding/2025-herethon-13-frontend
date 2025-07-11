@@ -238,22 +238,23 @@ body {
 }
 
 .challenge-add-btn {
-  align-self: flex-end;
+  position: absolute;              
+  align-self :flex-end; 
+  margin-right: 10px;
+  bottom: 10px;                    
   width: 172.632px;
   height: 58px;
-  background: #605BFF;
-  border: none;
-  border-radius: 8px;
+  background: #635bff;
   color: #FFF;
   font-family: "Segoe UI";
   font-size: 20px;
+  font-style: normal;
   font-weight: 600;
+  line-height: 15px;
+  border-radius: 10px;
+  border: none;
   cursor: pointer;
-  margin: 20px;
-  transition: background .1s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  transition: background 0.18s;
 }
 
 .challenge-side-cards-wrapper {
